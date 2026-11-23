@@ -21,3 +21,4 @@ python3 -m http.server 8000 --bind 127.0.0.1
 - 원작: [사업 2회차: 또 창업을 한다면](https://www.letter4ceo.com/games/business-second-run.html) 기여자. 원작 콘텐츠는 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.ko)이며, 이 게임은 일정·성장 방식과 사건 진행을 재구성했습니다.
 - 게임에 연결된 [그만의 아침편지](https://www.letter4ceo.com/) 등 외부 글의 권리는 각 글쓴이에게 있습니다. 자세한 출처와 변경 사항은 게임의 **자료와 제작 정보**에서 확인할 수 있습니다.
 - 일러스트는 이 버전을 위해 생성했습니다. MV 로고의 공개는 상표 사용권을 별도로 부여하지 않습니다.
+- 분기 원본: 이 저장소는 [VScommonBot/persona-startup-game](https://github.com/VScommonBot/persona-startup-game)(《사업 2회차 : 또 창업을 한다면》의 소스 저장소)에서 분기한 버전입니다.
