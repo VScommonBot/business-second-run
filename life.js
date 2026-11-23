@@ -116,14 +116,14 @@ function render(){
   if(cast.some(person=>person.id==='pet'&&person.file!==petFile))data.story={...data.story,cast:cast.map(person=>person.id==='pet'?{...person,file:petFile}:person)};
  }
  setMusicContext(state);
- document.body.classList.toggle('gx-body',view==='intro');
+ document.body.classList.toggle('gx-body',view==='intro');document.body.toggleAttribute('data-skin',view!=='intro');
  if(view==='intro'){app.innerHTML=introView(slotStore.slots.length,(dirty||hasBrowserSave)&&!!state);return;}
  if(view==='setup'){mountCharacterSetup({root:app,data,saved:state,characterMeta,getCharacterMeta:()=>characterMeta,onUnlock:unlockCharacter,onRewards:showQuests,onStart:options=>{const candidate=createState(options.industry,options.name,options);if(options.mode==='custom'&&!useCustomStart()){refreshCharacterSetup();return false;}state=candidate;workingSlotId=null;save();view='plan';render();window.scrollTo(0,0);return true;},onContinue:showSavedGames,onSavedGames:showSavedGames,onNewGame:newGame,onIntro:showIntro});return;}
  if(state.initialPlan&&!state.initialPlan.completed){view='plan';app.innerHTML=initialPlanView(state,data)+floatingDock();return;}
  state=syncRoadmap(syncAchievements(syncPeople(state,data.story)));characterMeta=mergeCharacterProgress(characterMeta,[state]);
  if(state.ending){try{const previous=readRankings(localStorage),next=recordRun(previous,state,data.industries[state.industry].label);if(next!==previous)localStorage.setItem(RANKING_KEY,JSON.stringify(next));}catch{}}
  const banner=state.pending||state.lastScene?.unread?`<div class="event-banner"><div><strong>${esc(state.pending?.title||'선택의 결과')}</strong><p>${state.pending?'선택을 기다리는 사건':esc(state.lastScene.title)}</p></div><button class="primary" data-action="event">이어서 보기</button></div>`:'';
- const gameUi=(view==='home'&&!state.ending)||view==='vshub';document.body.classList.toggle('gx-body',gameUi);
+ const gameUi=(view==='home'&&!state.ending)||view==='vshub';document.body.classList.toggle('gx-body',gameUi);document.body.toggleAttribute('data-skin',!gameUi);
  if(gameUi){const c=uiCtx();app.innerHTML=view==='vshub'?`<div class="gx g-vs">${vsHubView(state,data)}${gameTabbar(view)}</div>`:`<div class="gx gx-home">${gameTopbar(c)}${banner?`<div class="g-banner-wrap">${banner}</div>`:''}<h1 class="sr-only">${esc(state.name)} 대표의 작업실</h1>${gameDashboard(c)}${gameTabbar(view)}</div>`;animateCounts(app,slotStore.activeId);refreshActivityPicker(c);queueStatFloats(state);playStatFloats(app);tour.refresh();return;}
  app.innerHTML=`${nav()}<main class="shell">${pageHead()}${view==='home'?assistantBriefing(state):''}${state.pending||state.lastScene?.unread?`<div class="event-banner"><div><strong>${esc(state.pending?.title||'선택의 결과')}</strong><p>${state.pending?'선택을 기다리는 사건':esc(state.lastScene.title)}</p></div><button class="primary" data-action="event">이어서 보기</button></div>`:''}${state.ending&&view==='home'?endingView():({home:dashboard,furnishings:()=>furnishingShop(state),office:()=>officeView(state,esc),conditions:()=>profileView(state,data,esc,effectsText),growth:growthView,lessons:lessonsView,shop:shopView,people:()=>peopleView(state,data),wiki:()=>wikiView(wikiSearch,wikiCategory)}[view])()}</main>${floatingDock()}`;animateCounts(app,slotStore.activeId);queueStatFloats(state);playStatFloats(app);tour.refresh();
 }
