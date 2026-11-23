@@ -38,11 +38,11 @@ export function faceRig(file,{alt='',expr='neutral',act='',talk=false,cls='',laz
  return `<span class="face-rig ${f?'has-face':'no-face'} ${talk?'talking':''} ${cls}" data-expr="${expr}" data-act="${act}" style="--ar:${f?`${f.w}/${f.h}`:'auto'};--blink-delay:-${delay}s">${img}${f?overlay(f):''}</span>`;
 }
 // Circular/square crop focused on the face; the rig keeps the original aspect ratio inside the crop.
-export function faceCrop(file,{alt='',expr='neutral',act='',talk=false,zoom=3.1,cls=''}={}){
+export function faceCrop(file,{alt='',expr='neutral',act='',talk=false,zoom=3.1,cls='',lazy=true}={}){
  const f=faceFor(file);
- if(!f)return `<span class="face-crop no-face ${cls}"><img src="${esc(file)}" alt="${esc(alt)}" loading="lazy" decoding="async"></span>`;
+ if(!f)return `<span class="face-crop no-face ${cls}"><img src="${esc(file)}" alt="${esc(alt)}" ${lazy?'loading="lazy" decoding="async"':''}></span>`;
  const cx=(f.eyes[0][0]+f.eyes[1][0])/2,cy=(f.eyes[0][1]+f.mouth[1])/2,w=f.w/(f.d*zoom)*100,h=w*f.h/f.w;
- return `<span class="face-crop ${cls}"><span class="face-crop-inner" style="width:${w.toFixed(2)}%;left:${(50-cx/f.w*w).toFixed(2)}%;top:${(50-cy/f.h*h).toFixed(2)}%">${faceRig(file,{alt,expr,act,talk})}</span></span>`;
+ return `<span class="face-crop ${cls}"><span class="face-crop-inner" style="width:${w.toFixed(2)}%;left:${(50-cx/f.w*w).toFixed(2)}%;top:${(50-cy/f.h*h).toFixed(2)}%">${faceRig(file,{alt,expr,act,talk,lazy})}</span></span>`;
 }
 export function setExpression(root,{expr,act,talk}={}){
  const rigs=root?.matches?.('.face-rig')?[root]:[...(root?.querySelectorAll?.('.face-rig')||[])];
