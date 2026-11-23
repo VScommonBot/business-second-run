@@ -243,7 +243,7 @@ export function characterProgress(state){
 }
 export function mergeCharacterProgress(previous={},states=[]){
  const meta=normalizeCareer(previous),progress={...meta.progress};
- for(const state of states.filter(s=>s&&s.mode!=='custom'))for(const [key,value]of Object.entries(characterProgress(state)))progress[key]=Math.max(safe(progress[key]),value);
+ for(const state of states.filter(s=>s&&s.mode!=='custom'&&!s.autoAssisted&&!s.autoSummary))for(const [key,value]of Object.entries(characterProgress(state)))progress[key]=Math.max(safe(progress[key]),value);
  return {...meta,progress};
 }
 export function readCharacterProgress(storage,states=[]){

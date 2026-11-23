@@ -5,7 +5,9 @@ const number=n=>Math.round(n).toLocaleString('ko-KR');
 export const QUESTS=REWARD_QUESTS;
 export const questProgress=characterProgress;
 const rewardLabel=q=>q.character?`${SPECIAL_CHARACTERS.find(p=>p.id===q.character).name} 해금`:'커스텀 1회권';
-export function syncAchievements(state){const progress=questProgress(state),earned={...state.achievements};let changed=false;for(const q of QUESTS)if(!earned[q.id]&&progress[q.metric]>=q.target){earned[q.id]={month:Math.max(1,Math.min(60,state.month-1))};changed=true;}return changed?{...state,achievements:earned}:state;}
+export const isAutoAssisted=state=>!!(state?.autoAssisted||state?.autoSummary);
+// AUTO-assisted runs never earn achievements.
+export function syncAchievements(state){if(isAutoAssisted(state))return state;const progress=questProgress(state),earned={...state.achievements};let changed=false;for(const q of QUESTS)if(!earned[q.id]&&progress[q.metric]>=q.target){earned[q.id]={month:Math.max(1,Math.min(60,state.month-1))};changed=true;}return changed?{...state,achievements:earned}:state;}
 export function questStatus(state){const progress=questProgress(state),s=syncAchievements(state);return QUESTS.map(q=>({...q,earned:!!s.achievements?.[q.id],earnedMonth:s.achievements?.[q.id]?.month,value:progress[q.metric]||0,percent:Math.min(100,(progress[q.metric]||0)/q.target*100)}));}
 export function questShowcase(state,career={}){
  const meta=normalizeCareer(career),quests=rewardStatus(meta),earned=quests.filter(q=>q.earned),available=earned.filter(q=>!q.claimed).length,next=quests.find(q=>!q.earned);
