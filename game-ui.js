@@ -3,6 +3,7 @@ import {faceRig,faceCrop,toneExpression,motionEnabled} from './game-fx.js';
 import {calendarEntries,briefingText} from './calendar.js';
 import {roadmapStatus,goalDate} from './plan-roadmap.js';
 import {adviceFor,relationshipLabel} from './story-engine.js';
+import {pickAdviceLine} from './dialogue.js';
 import {relationshipSignal} from './relationship-events.js';
 
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -120,9 +121,8 @@ export function advisorLine(c,id){
  const r=s.relations?.[id]??15,label=relationshipLabel(r);
  const advice=s.pending&&!s.ending?adviceFor(s,story).find(a=>a.person.id===id):null;
  if(advice)return {p,r,label,line:advice.line,context:`지금 사건 · ${s.pending.title} · ${advice.stance} 의견`,mood:toneExpression({stance:advice.stance})};
- const prefs=story.seats[id]?.prefs||{},tag=Object.keys(prefs).sort((a,b)=>prefs[b]-prefs[a]).find(t=>story.adviceLines[id]?.[t])||'trust';
- const lines=story.adviceLines[id]?.[tag]||['지금 감당할 수 있는 선택인지 한 번 더 살펴봐요.'];
- return {p,r,label,line:lines[(Math.max(1,s.month)+id.length)%lines.length],context:`${label} · 호감도 ${r} · ${relationshipSignal(r).hint}`,mood:toneExpression({relation:r})};
+ const picked=pickAdviceLine(s,story,id);
+ return {p,r,label,line:picked.text,context:`${label} · 호감도 ${r} · ${relationshipSignal(r).hint}`,mood:toneExpression({relation:r})};
 }
 export function advisorPopHtml(c,id){
  const a=advisorLine(c,id);if(!a)return '';
