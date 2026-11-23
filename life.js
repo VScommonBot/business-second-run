@@ -276,7 +276,7 @@ if(action==='confirm-auto-finish'){await skipToEnding();return true;}
  if(action==='event'){showEvent();return true;}
  if(action==='choose-event'){const next=prepareDecision(state,Number(b.dataset.index),data.story);if(next!==state){state=next;save();render();showEvent();}return true;}
  if(action==='advice-back'){state=reconsiderDecision(state);save();showEvent();return true;}
- if(action==='advice-follow'||action==='advice-self'){const next=resolveDecision(state,action==='advice-self'?'self':id,data);if(next!==state){state=next;save();render();showResult();}return true;}
+ if(action==='advice-follow'||action==='advice-self'){if(b.dataset.ends&&!b.dataset.confirmed){b.dataset.confirmed='1';b.classList.add('confirming');b.textContent='정말 폐업하고 끝내기';b.setAttribute('aria-label','정말 폐업하고 게임 끝내기. 되돌릴 수 없어요.');toast('한 번 더 누르면 폐업이 확정돼요.');return true;}const next=resolveDecision(state,action==='advice-self'?'self':id,data);if(next!==state){state=next;save();render();showResult();}return true;}
  if(action==='scene-done'){state=acknowledgeScene(state);save();modal.close();render();return true;}
  if(action==='meet-person'){const raw=requestEncounter(state,id,data);if(raw){state={...state,pending:adaptEvent(raw,state)};save();render();showEvent();}return true;}
  if(action==='person'){const detail=personDetail(state,data,id);if(detail)modalOpen(detail.title,detail.body);return true;}

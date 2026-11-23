@@ -135,7 +135,7 @@ export function runMonth(state,data){
 }
 export function nextEvent(s,data){
  const queued=s.queuedEvents?.shift();if(queued){const raw=data.events.find(e=>e.id===queued);if(raw&&eventAvailability(s,raw,data).ok)return adaptEvent(raw,s);}
- if((s.month-1)%10===0&&data.worldEvents?.length){const pool=data.worldEvents.filter(w=>!s.seenEvents.includes('world_'+w.id));const world=(pool.length?pool:data.worldEvents)[Math.floor(random(s)*(pool.length||data.worldEvents.length))];return adaptEvent({id:'world_'+world.id,title:world.headline,text:`${world.label} 상황에서 회사의 다음 방향을 정해 주세요.`,choices:world.branches.map(b=>({...b,label:b.label+' · '+b.text.replace(/\n/g,' '),next:b.follow}))},s);}
+ if((s.month-1)%10===0&&data.worldEvents?.length){const fits=data.worldEvents.filter(w=>!w.ind||w.ind.includes(s.industry));const pool=fits.filter(w=>!s.seenEvents.includes('world_'+w.id));const world=(pool.length?pool:fits)[Math.floor(random(s)*(pool.length||fits.length))];return adaptEvent({id:'world_'+world.id,title:world.headline,text:`${world.label} 상황에서 회사의 다음 방향을 정해 주세요.`,choices:world.branches.map(b=>({...b,label:b.label+' · '+b.text.replace(/\n/g,' '),next:b.follow}))},s);}
  const industryEvent=data.events.find(e=>e.industryMonth&&e.ind===s.industry&&!s.seenEvents.includes(e.id)&&eventAvailability(s,e,data).ok);
  if(industryEvent)return adaptEvent(industryEvent,s);
  const relationshipEvent=nextRelationshipEvent(s);if(relationshipEvent)return adaptEvent(relationshipEvent,s);
