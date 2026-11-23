@@ -1,4 +1,6 @@
-// 공개 주소가 확정되면 한 곳에서 바꾸는 게임 URL 플레이스홀더 설정
-// TODO(배포): 실제 공개 주소가 정해지면 GAME_URL과 index.html의 canonical·og 주소(같은 플레이스홀더 문자열)를 함께 바꿉니다.
-export const GAME_URL='https://GAME-URL-PLACEHOLDER.example/';
+// 게임 공개 주소와 결과 카드 QR 이미지를 한 곳에서 관리하는 설정
+// 주소는 끝 슬래시 없이 씁니다(서버가 /modoostartup/ 을 /modoostartup 으로 308 리디렉션). index.html의 canonical·og 주소도 같은 값입니다.
+export const GAME_URL='https://www.letter4ceo.com/games/modoostartup';
+// 로컬에서 qrcode(오류 정정 M)로 만든 GAME_URL QR. 주소를 바꾸면 이 파일도 새로 만듭니다.
+export const GAME_QR='assets/qr-game.png';
 export const isPlaceholderUrl=url=>url.includes('GAME-URL-PLACEHOLDER');

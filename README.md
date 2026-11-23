@@ -1,16 +1,16 @@
 # 모두의 창업: CEO로 살아남기
 
-창업자가 되어 한 달의 일정을 짜고, 사람을 만나며 회사를 운영하는 한국어 브라우저 게임입니다. (공개 주소 확정 전 · `site-config.js`의 `GAME_URL`과 `index.html`의 `GAME-URL-PLACEHOLDER`를 함께 바꿉니다)
+창업자가 되어 한 달의 일정을 짜고, 사람을 만나며 회사를 운영하는 한국어 브라우저 게임입니다. 공개 주소는 <https://www.letter4ceo.com/games/modoostartup>입니다(주소를 바꿀 때는 `site-config.js`의 `GAME_URL`, `index.html`의 canonical·og 주소, `assets/qr-game.png`를 함께 바꿉니다).
 
 ## 내 컴퓨터에서 실행하기
 
 Python 3가 있다면 저장소를 내려받아 압축을 푼 뒤, `index.html`이 있는 폴더에서 실행하세요.
 
 ```sh
-python3 -m http.server 8000 --bind 127.0.0.1
+python3 tools/dev-server.py 8000
 ```
 
-브라우저에서 <http://127.0.0.1:8000/>을 엽니다. 별도 빌드나 계정은 필요하지 않습니다. 파일을 더블클릭하는 대신 로컬 서버를 사용해야 브라우저가 게임 모듈과 데이터를 읽을 수 있습니다.
+브라우저에서 <http://127.0.0.1:8000/>(또는 배포 경로와 같은 <http://127.0.0.1:8000/games/modoostartup>)을 엽니다. `index.html`에 `<base href="/games/modoostartup/">`가 있어서, 그냥 `python3 -m http.server`로 열면 자원 경로를 찾지 못합니다. 별도 빌드나 계정은 필요하지 않습니다. 파일을 더블클릭하는 대신 로컬 서버를 사용해야 브라우저가 게임 모듈과 데이터를 읽을 수 있습니다.
 
 ## 이 저장소에 담은 것
 
