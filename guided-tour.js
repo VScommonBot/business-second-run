@@ -2,10 +2,10 @@ const taskIds=['research','build','sales','rest'];
 export function guideStepFor(state,stage=0){
  if(!state||state.ending)return {target:'.ending-hero',title:'이번 도전의 결과예요',text:'계획 복기와 경영 평가에서 다음 도전의 목표를 찾아보세요.',last:true};
  if(state.pending||state.lastScene?.unread)return {target:'[data-action="event"]',title:'결정할 이야기가 있어요',text:'강조된 버튼을 눌러 이야기를 열고, 선택지와 조언을 확인해 보세요.',action:'event',last:true};
- if(stage===0)return {target:'.month-calendar',title:'지금은 이 달을 보내고 있어요',text:'달력을 누르면 한 해의 주요 일정을 볼 수 있어요. 매달 4주를 직접 채워 회사를 운영해요.'};
- if(stage===1)return {target:'.numbers',title:'회사의 현재 상태예요',text:'현금·매출·고객을 함께 살펴보세요. 이제 실제 일정을 하나씩 채워볼까요?'};
+ if(stage===0)return {target:'[data-tour-target="calendar"],.month-calendar',title:'지금은 이 달을 보내고 있어요',text:'달력을 누르면 한 해의 주요 일정을 볼 수 있어요. 매달 4주를 직접 채워 회사를 운영해요.'};
+ if(stage===1)return {target:'[data-tour-target="numbers"],.numbers',title:'회사의 현재 상태예요',text:'현금·매출·고객을 함께 살펴보세요. 이제 실제 일정을 하나씩 채워볼까요?'};
  if(state.plan.length<4){const id=taskIds.find(id=>!state.plan.includes(id))||'rest',names={research:'고객 만나기',build:'제품 만들기',sales:'영업 나가기',rest:'충분히 쉬기'},copy={research:'고객의 불편을 듣고 시장 이해를 높여요.',build:'고객에게 줄 제품을 만들고 제품력을 높여요.',sales:'제품이 필요한 고객을 찾아 영업력을 높여요.',rest:'체력을 회복해 다음 달에도 일할 힘을 남겨요.'};return {target:`[data-action="plan"][data-id="${id}"]`,title:`${state.plan.length+1}주를 채워볼까요?`,text:`${copy[id]} 화살표가 가리키는 ‘${names[id]}’를 눌러 주세요.`,action:'plan',id};}
- if(stage<3)return {target:'.plan-summary',title:'시작하기 전에 확인해요',text:'4주 일정의 활동비, 월 고정비, 남은 체력이에요. 마음이 바뀌면 각 일정의 ×로 지울 수 있어요.'};
+ if(stage<3)return {target:'[data-tour-target="plan-summary"],.plan-summary',title:'시작하기 전에 확인해요',text:'4주 일정의 활동비, 월 고정비, 남은 체력이에요. 마음이 바뀌면 각 일정의 ×로 지울 수 있어요.'};
  return {target:'[data-action="run"]',title:'첫 달을 직접 시작해요',text:'강조된 버튼을 누르면 일정이 실행되고 월말 정산이 나와요. 진행 기록은 저장 버튼으로 남겨 주세요.',action:'run',last:true};
 }
 export function createGuidedTour({getState,onFinish}){

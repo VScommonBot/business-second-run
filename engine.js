@@ -121,12 +121,12 @@ export function runMonth(state,data){
  const spaceEffects=locationBonus(s.businessPlace);for(const [key,value]of Object.entries(spaceEffects)){const old=s.skills[key];s.skills[key]=clamp(old+value);spaceEffects[key]=s.skills[key]-old;}
  const signature=signatureEffects(s);applyEffects(s,signature);
  const ind=data.industries[s.industry];let newCustomers=0;
- if(s.skills.product>=30){const salesWeeks=s.plan.filter(x=>x==='sales').length;newCustomers=Math.max(1,Math.round((s.skills.sales*.11+s.skills.insight*.06+s.skills.network*.04+salesWeeks*4)*(0.9+random(s)*.2)*Math.max(.1,1+(s.demandMod??0))*balanceFor(s).demand));s.customers=Math.max(0,Math.round(s.customers*(1-clamp((ind.churn||.07)+(s.churnMod??0)+balanceFor(s).churn,0,.9))))+newCustomers;}
+ if(s.skills.product>=30){const salesWeeks=s.plan.filter(x=>x==='sales').length;newCustomers=Math.max(1,Math.round((s.skills.sales*.11+s.skills.insight*.06+s.skills.network*.04+salesWeeks*4)*(0.9+random(s)*.2)*Math.max(.1,1+(s.demandMod??0))*balanceFor(s).demand*(1+Math.min(100,s.media||0)/400)));s.customers=Math.max(0,Math.round(s.customers*(1-clamp((ind.churn||.07)+(s.churnMod??0)+balanceFor(s).churn,0,.9))))+newCustomers;}
  s.revenue=Math.round(s.customers*ind.arpu*(.7+s.skills.product/100)*Math.max(.1,1+(s.arpuMod??0)));
  const running=Math.round(s.revenue*clamp((ind.cogs||.25)+(s.worldCost??0),0,.95))+f.fixed;s.profit=s.revenue-running-f.cost;s.cash+=s.revenue-running;if(s.items.includes('plant'))s.health=clamp(s.health+5);s.cash=Math.round(s.cash);s.monthlyExpense=running+f.cost;
  s.history.push({month:s.month,revenue:s.revenue,profit:s.profit,cash:s.cash,health:s.health,skills:{...s.skills},before:{cash:before.cash,revenue:before.revenue,customers:before.customers,health:before.health,skills:{...before.skills}},expense:s.monthlyExpense,actions:[...s.plan],spaceEffects:{...spaceEffects},customers:s.customers,team:s.team,equity:s.equity,businessPlace:s.businessPlace});
  const report={month:s.month,rows,traitEffects:bonus,signatureEffects:signature,spaceEffects,newCustomers,revenue:s.revenue,expense:running+f.cost,profit:s.profit,health:s.health-before.health,skills:Object.fromEntries(Object.keys(SKILLS).map(k=>[k,s.skills[k]-before.skills[k]]))};
- s.plan=[];s.month++;
+ s.plan=[];s.month++;if(s.media)s.media=Math.max(0,s.media-3);
  const due=(s.delayed||[]).filter(d=>d.month<=s.month-1);s.delayed=(s.delayed||[]).filter(d=>d.month>s.month-1);
  for(const d of due){applyEffects(s,adaptEffects(d.fx,s));applyContext(s,d.fx);s.journal.unshift({month:s.month-1,title:'이전 선택의 후속 결과',text:d.text,type:'event'});}
  roundMoney(s);
