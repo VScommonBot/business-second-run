@@ -12,13 +12,13 @@ export function evaluateRun(state){
  const relationships=Object.entries(state.relations||{}).filter(([id])=>id!=='ai_agent'&&state.seats?.[id]).map(([,v])=>clip(v/100));
  // Rebalanced 2026-11: the old score saturated (tiny plan goals, profit vs. a small personal investment, last-month health), so every difficulty and AUTO run reached S.
  const expand=goals.find(g=>g.id==='expand')?.target||100,peakCustomers=Math.max(state.customers||0,...history.map(r=>r.customers||0));
- const profitTarget=Math.max(10000,(state.initialFinances?.setup||300)*6),avgHealth=history.length?history.reduce((s,r)=>s+(Number.isFinite(r.health)?r.health:0),0)/history.length:state.health;
+ const profitTarget=Math.max(15000,(state.initialFinances?.setup||300)*10),avgHealth=history.length?history.reduce((s,r)=>s+(Number.isFinite(r.health)?r.health:0),0)/history.length:state.health;
  const pieces=[
   {label:'계획 달성',score:Math.round(completed/n*300),max:300,detail:`처음 세운 목표 ${completed} / ${goals.length}개 달성`},
   {label:'기한 준수',score:Math.round(onTime/n*100),max:100,detail:`기한 안에 ${onTime}개 달성`},
-  {label:'성장 규모',score:Math.round(clip(peakCustomers/(expand*6))*200),max:200,detail:`최고 고객 수 ÷ 고객 확대 목표의 6배 (${(expand*6).toLocaleString()}명)`},
-  {label:'수익성',score:Math.round(clip(profit/profitTarget)*200),max:200,detail:`누적 월간 손익 ÷ 초기 준비 비용의 6배 (최소 1억 원 · 이번 기준 ${profitTarget.toLocaleString()}만 원)`},
-  {label:'건강',score:Math.round(clip((avgHealth-30)/60)*100),max:100,detail:'운영 기간 평균 체력 (30 이하 0점 · 90 이상 만점)'},
+  {label:'성장 규모',score:Math.round(clip(peakCustomers/(expand*10))*200),max:200,detail:`최고 고객 수 ÷ 고객 확대 목표의 10배 (${(expand*10).toLocaleString()}명)`},
+  {label:'수익성',score:Math.round(clip(profit/profitTarget)*200),max:200,detail:`누적 월간 손익 ÷ 초기 준비 비용의 10배 (최소 1억 5천만 원 · 이번 기준 ${profitTarget.toLocaleString()}만 원)`},
+  {label:'건강',score:Math.round(clip((avgHealth-40)/55)*100),max:100,detail:'운영 기간 평균 체력 (40 이하 0점 · 95 이상 만점)'},
   {label:'관계',score:Math.round((relationships.length?relationships.reduce((a,b)=>a+b,0)/relationships.length:0)*100),max:100,detail:'만난 인물의 평균 관계 점수 (음수는 0점)'}
  ];
  const score=pieces.reduce((sum,p)=>sum+p.score,0),auto=!!(state.autoAssisted||state.autoSummary);
