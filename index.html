@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="ko">
 <head>
+  <!-- 기준 경로: 배포 위치 /games/modoostartup 기준(슬래시 없는 주소에서도 상대 경로가 맞게). 로컬에서는 tools/dev-server.py로 엽니다 -->
+  <base href="/games/modoostartup/">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#2563eb">
@@ -29,24 +31,24 @@
   <meta name="twitter:image:alt" content="모두의 창업 파란색 MV 로고">
 
   <link rel="icon" type="image/webp" href="assets/mv-logo-blue.webp">
-  <link rel="stylesheet" href="life.css?v=18">
-  <link rel="stylesheet" href="ending.css?v=18">
-  <link rel="stylesheet" href="intro.css?v=18">
-  <link rel="stylesheet" href="insights.css?v=18">
-  <link rel="stylesheet" href="founder-update.css?v=18">
-  <script type="importmap">{"imports":{"./achievements.js":"./achievements.js?v=18","./ad-inquiry.js":"./ad-inquiry.js?v=18","./automation.js":"./automation.js?v=18","./background.js":"./background.js?v=18","./browser-save.js":"./browser-save.js?v=18","./calendar.js":"./calendar.js?v=18","./career-economy.js":"./career-economy.js?v=18","./character-setup.js":"./character-setup.js?v=18","./conditions.js":"./conditions.js?v=18","./count-motion.js":"./count-motion.js?v=18","./custom-portrait.js":"./custom-portrait.js?v=18","./ending-mood.js":"./ending-mood.js?v=18","./ending-report.js":"./ending-report.js?v=18","./ending-share.js":"./ending-share.js?v=18","./ending-view.js":"./ending-view.js?v=18","./engine.js":"./engine.js?v=18","./event-risk.js":"./event-risk.js?v=18","./extended-cast.js":"./extended-cast.js?v=18","./face-map.js":"./face-map.js?v=18","./founder-names.js":"./founder-names.js?v=18","./founder-options.js":"./founder-options.js?v=18","./game-fx.js":"./game-fx.js?v=18","./game-guide.js":"./game-guide.js?v=18","./game-ui.js":"./game-ui.js?v=18","./glossary-details.js":"./glossary-details.js?v=18","./glossary.js":"./glossary.js?v=18","./guided-tour.js":"./guided-tour.js?v=18","./history-view.js":"./history-view.js?v=18","./intro-view.js":"./intro-view.js?v=18","./life.js":"./life.js?v=18","./locations.js":"./locations.js?v=18","./manual-save.js":"./manual-save.js?v=18","./metrics-view.js":"./metrics-view.js?v=18","./music-score.js":"./music-score.js?v=18","./music.js":"./music.js?v=18","./office.js":"./office.js?v=18","./plan-options.js":"./plan-options.js?v=18","./plan-roadmap.js":"./plan-roadmap.js?v=18","./profile-view.js":"./profile-view.js?v=18","./reading-view.js":"./reading-view.js?v=18","./relationship-events.js":"./relationship-events.js?v=18","./rewind.js":"./rewind.js?v=18","./run-evaluation.js":"./run-evaluation.js?v=18","./save-slots.js":"./save-slots.js?v=18","./scenery.js":"./scenery.js?v=18","./site-config.js":"./site-config.js?v=18","./startup-plan.js":"./startup-plan.js?v=18","./stat-view.js":"./stat-view.js?v=18","./story-engine.js":"./story-engine.js?v=18","./story-views.js":"./story-views.js?v=18","./vs-hub.js":"./vs-hub.js?v=18","./wiki-match.js":"./wiki-match.js?v=18","./wiki-view.js":"./wiki-view.js?v=18"}}</script>
-  <link rel="stylesheet" href="career-update.css?v=18">
-  <link rel="stylesheet" href="session-update.css?v=18">
-  <link rel="stylesheet" href="office.css?v=18">
-  <link rel="stylesheet" href="gameplay-fixes.css?v=18">
-  <link rel="stylesheet" href="game-fx.css?v=18">
-  <link rel="stylesheet" href="game-ui.css?v=18">
+  <link rel="stylesheet" href="life.css?v=19">
+  <link rel="stylesheet" href="ending.css?v=19">
+  <link rel="stylesheet" href="intro.css?v=19">
+  <link rel="stylesheet" href="insights.css?v=19">
+  <link rel="stylesheet" href="founder-update.css?v=19">
+  <script type="importmap">{"imports":{"./achievements.js":"./achievements.js?v=19","./ad-inquiry.js":"./ad-inquiry.js?v=19","./automation.js":"./automation.js?v=19","./background.js":"./background.js?v=19","./browser-save.js":"./browser-save.js?v=19","./calendar.js":"./calendar.js?v=19","./career-economy.js":"./career-economy.js?v=19","./character-setup.js":"./character-setup.js?v=19","./conditions.js":"./conditions.js?v=19","./count-motion.js":"./count-motion.js?v=19","./custom-portrait.js":"./custom-portrait.js?v=19","./ending-mood.js":"./ending-mood.js?v=19","./ending-report.js":"./ending-report.js?v=19","./ending-share.js":"./ending-share.js?v=19","./ending-view.js":"./ending-view.js?v=19","./engine.js":"./engine.js?v=19","./event-risk.js":"./event-risk.js?v=19","./extended-cast.js":"./extended-cast.js?v=19","./face-map.js":"./face-map.js?v=19","./founder-names.js":"./founder-names.js?v=19","./founder-options.js":"./founder-options.js?v=19","./game-fx.js":"./game-fx.js?v=19","./game-guide.js":"./game-guide.js?v=19","./game-ui.js":"./game-ui.js?v=19","./glossary-details.js":"./glossary-details.js?v=19","./glossary.js":"./glossary.js?v=19","./guided-tour.js":"./guided-tour.js?v=19","./history-view.js":"./history-view.js?v=19","./intro-view.js":"./intro-view.js?v=19","./life.js":"./life.js?v=19","./locations.js":"./locations.js?v=19","./manual-save.js":"./manual-save.js?v=19","./metrics-view.js":"./metrics-view.js?v=19","./music-score.js":"./music-score.js?v=19","./music.js":"./music.js?v=19","./office.js":"./office.js?v=19","./plan-options.js":"./plan-options.js?v=19","./plan-roadmap.js":"./plan-roadmap.js?v=19","./profile-view.js":"./profile-view.js?v=19","./reading-view.js":"./reading-view.js?v=19","./relationship-events.js":"./relationship-events.js?v=19","./rewind.js":"./rewind.js?v=19","./run-evaluation.js":"./run-evaluation.js?v=19","./save-slots.js":"./save-slots.js?v=19","./scenery.js":"./scenery.js?v=19","./site-config.js":"./site-config.js?v=19","./startup-plan.js":"./startup-plan.js?v=19","./stat-view.js":"./stat-view.js?v=19","./story-engine.js":"./story-engine.js?v=19","./story-views.js":"./story-views.js?v=19","./vs-hub.js":"./vs-hub.js?v=19","./wiki-match.js":"./wiki-match.js?v=19","./wiki-view.js":"./wiki-view.js?v=19"}}</script>
+  <link rel="stylesheet" href="career-update.css?v=19">
+  <link rel="stylesheet" href="session-update.css?v=19">
+  <link rel="stylesheet" href="office.css?v=19">
+  <link rel="stylesheet" href="gameplay-fixes.css?v=19">
+  <link rel="stylesheet" href="game-fx.css?v=19">
+  <link rel="stylesheet" href="game-ui.css?v=19">
 </head>
 <body>
   <div id="app"><div class="loading"><strong>모두의 창업</strong><p>오늘의 작업실을 준비하고 있어요.</p></div></div>
   <dialog id="modal"></dialog>
   <div id="toast" role="status" aria-live="polite"></div>
   <div id="fx-live" class="sr-live" aria-live="polite"></div>
-  <script type="module" src="life.js?v=18"></script>
+  <script type="module" src="life.js?v=19"></script>
 </body>
 </html>
