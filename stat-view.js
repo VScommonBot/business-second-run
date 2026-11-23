@@ -43,8 +43,8 @@ export const statIcon=key=>`<svg class="icon" aria-hidden="true" viewBox="0 0 24
 export const brandMark=()=>'<div class="brand-mark"><img src="assets/mv-logo-blue.png" width="40" height="40" alt="MV 로고"></div>';
 export const statSymbol=(key,label)=>`<span class="stat-label"><span class="stat-symbol" aria-hidden="true">${statIcon(key)}</span><span class="stat-name">${label}</span></span>`;
 export function gaugeBand(value){return value<20?'red':value<40?'orange':value<60?'yellow':value<90?'green':'blue';}
-export function gaugesHTML(gauges){
- return `<div class="gauge-grid">${Object.entries(GAUGES).map(([key,label])=>`<div class="gauge-stat" data-band="${gaugeBand(gauges[key])}"><div class="gauge-value">${statSymbol(key,label)}<strong>${countNumber('gauge-'+key,gauges[key])}<small> / 100</small></strong></div><div class="bar" role="meter" aria-label="${label}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${gauges[key]}"><i style="width:${gauges[key]}%"></i></div><p>${gaugeDescription(key,gauges[key])}</p></div>`).join('')}</div>`;
+export function gaugesHTML(gauges,ageGroup='30s'){
+ return `<div class="gauge-grid">${Object.entries(GAUGES).map(([key,label])=>`<div class="gauge-stat" data-band="${gaugeBand(gauges[key])}"><div class="gauge-value">${statSymbol(key,label)}<strong>${countNumber('gauge-'+key,gauges[key])}<small> / 100</small></strong></div><div class="bar" role="meter" aria-label="${label}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${gauges[key]}"><i style="width:${gauges[key]}%"></i></div><p>${gaugeDescription(key,gauges[key],ageGroup)}</p></div>`).join('')}</div>`;
 }
 export function traitsHTML(traits,esc){
  const bonuses=Object.entries(traitBonuses(traits)).filter(([,n])=>n>0);
