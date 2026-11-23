@@ -105,3 +105,36 @@ html.character-motion-off .g-ticker .g-roll,html.character-motion-off .g-island.
 .g-banner-wrap .event-banner{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0;padding:12px 16px;border-radius:18px;border:3px solid var(--ink);background:linear-gradient(180deg,#ffe08a,var(--gold));color:#4a2400;box-shadow:0 5px 0 var(--ink)}
 .g-banner-wrap .event-banner p{margin:2px 0 0;font-size:12px;font-weight:700}
 .g-banner-wrap .event-banner .primary{flex:none;min-height:42px;padding:0 18px;border-radius:14px;border:3px solid var(--ink);background:linear-gradient(180deg,#ff9cc0,var(--pink));color:#fff;font-weight:900;box-shadow:0 4px 0 var(--ink)}
+/* 사업 단계 맵 레이어 순서(피드백 2026-11-23): 길(0) < 타일 옆면·윗면 < 라벨 < 아이콘 < '지금 여기' 아바타 */
+.g-map-stage svg.bridges{z-index:0}
+.g-isles{z-index:1}
+.g-isle{isolation:isolate}
+.g-isle .g-side{z-index:0}
+.g-isle .g-top{z-index:1}
+.g-island .g-name,.g-island .g-due{position:relative;z-index:2}
+.g-isle .g-icon{z-index:3;top:-24px;font-size:32px;line-height:1}
+.g-pin{z-index:4}
+.g-pin-tag{z-index:5}
+@media (max-width:760px){.g-isle .g-icon{top:-10px}}
+/* 조언자 얼굴 팝업: 얼굴 위쪽 말풍선(모자라면 아래), 화면 밖으로 나가지 않게 JS가 left/top을 잡습니다 */
+.g-adv{cursor:pointer;border-radius:12px}
+.g-adv:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.g-adv-pop{position:fixed;inset:auto;margin:0;width:min(300px,calc(100vw - 16px));max-height:calc(100vh - 16px);overflow:visible;padding:12px 14px 12px;border-radius:16px;color:var(--ink,#121647);background:#fffdf5;border:3px solid var(--ink,#121647);box-shadow:0 5px 0 var(--ink,#121647),0 14px 30px rgba(0,0,0,.35);font-size:13px;line-height:1.45}
+.g-adv-pop::before{content:"";position:absolute;left:calc(var(--tail,50%) - 10px);bottom:-13px;width:20px;height:13px;background:var(--ink,#121647);clip-path:polygon(0 0,100% 0,50% 100%)}
+.g-adv-pop::after{content:"";position:absolute;left:calc(var(--tail,50%) - 7px);bottom:-8px;width:14px;height:9px;background:#fffdf5;clip-path:polygon(0 0,100% 0,50% 100%)}
+.g-adv-pop.below::before{bottom:auto;top:-13px;clip-path:polygon(50% 0,100% 100%,0 100%)}
+.g-adv-pop.below::after{bottom:auto;top:-8px;clip-path:polygon(50% 0,100% 100%,0 100%)}
+.g-adv-pop::backdrop{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none}
+.g-ap-head{display:flex;align-items:center;gap:10px}
+.g-ap-face .face-crop{width:46px;height:46px;border:3px solid var(--ink,#121647);border-radius:50%}
+.g-ap-who{display:flex;flex-direction:column;min-width:0;flex:1}
+.g-ap-who b{font-size:15px;font-weight:900}
+.g-ap-who span{font-size:11.5px;font-weight:700;color:#4a4f86}
+.g-ap-close{flex:none;width:30px;height:30px;border-radius:9px;border:2px solid var(--ink,#121647);background:#e8ebff;color:var(--ink,#121647);font-size:18px;font-weight:900;line-height:1;cursor:pointer}
+.g-ap-close:focus-visible,.g-adv-pop .g-btn3d:focus-visible{outline:3px solid var(--gold,#f6b42c);outline-offset:2px}
+.g-ap-line{margin:10px 0 6px;font-weight:800;font-size:13.5px}
+.g-ap-ctx{margin:0 0 10px;font-size:11.5px;font-weight:600;color:#5a5f8f}
+.g-ap-actions{display:flex;justify-content:flex-end}
+@media (prefers-reduced-motion:no-preference){.g-adv-pop:popover-open{transition:opacity .16s ease,translate .16s ease}@starting-style{.g-adv-pop:popover-open{opacity:0;translate:0 6px}}}
+/* 인물 수첩에서 '자세히 보기'로 선택된 인물 */
+.person-card.is-selected{outline:4px solid #f6b42c;outline-offset:3px;box-shadow:0 0 0 8px rgba(246,180,44,.25)}

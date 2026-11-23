@@ -1,4 +1,4 @@
-// 벤처스퀘어 허브: 기사 신청·멘토링 신청·미디어 노출도(신규 규칙)와 기존 지원사업·전시회·데모데이·투자자 만남 연결 화면
+// 벤처스퀘어 허브: 보도자료 발송·멘토링 신청·미디어 노출도(신규 규칙)와 기존 지원사업·전시회·데모데이·투자자 만남 연결 화면
 import {calendarEntries} from './calendar.js';
 import {canMeetExtra,EXTRA_CAST} from './extended-cast.js';
 import {sceneAsset} from './scenery.js';
@@ -16,8 +16,8 @@ const lastUse=(state,key)=>state.vsHub?.[key]??-99;
 export function hubAvailability(state,key){
  const r=VS_RULES[key],wait=r.cooldown-(state.month-lastUse(state,key));
  if(state.ending||state.pending||state.lastScene?.unread)return {ok:false,reason:'진행 중인 사건을 먼저 마무리해 주세요.'};
- if(key==='article'&&state.skills.product<r.minProduct)return {ok:false,reason:`제품력 ${r.minProduct} 이상(첫 제품 준비)부터 신청할 수 있어요.`};
- if(wait>0)return {ok:false,reason:`${wait}개월 뒤 다시 신청할 수 있어요.`};
+ if(key==='article'&&state.skills.product<r.minProduct)return {ok:false,reason:`제품력 ${r.minProduct} 이상(첫 제품 준비)부터 ${key==='article'?'보도자료를 보낼':'신청할'} 수 있어요.`};
+ if(wait>0)return {ok:false,reason:`${wait}개월 뒤 다시 ${key==='article'?'보낼':'신청할'} 수 있어요.`};
  if(state.health+r.health<=5)return {ok:false,reason:'체력이 부족해요. 먼저 쉬어 주세요.'};
  return {ok:true,reason:''};
 }
@@ -29,7 +29,7 @@ export function applyHub(state,key){
  if(r.media)s.media=clamp((s.media||0)+r.media);
  if(r.relation&&s.relations)s.relations.mentor=clamp((s.relations.mentor??15)+r.relation,-100,100);
  s.vsHub={...(s.vsHub||{}),[key]:s.month,[`${key}Count`]:(s.vsHub?.[`${key}Count`]||0)+1};
- s.journal=[{month:s.month,title:key==='article'?'벤처스퀘어 기사 신청':'벤처스퀘어 멘토링',text:key==='article'?'회사 소개 자료를 정리해 게임 속 벤처스퀘어 기자에게 보냈다.':'정우진 멘토와 첫 거래처를 만날 방법을 함께 정리했다.',type:'event'},...(s.journal||[])];
+ s.journal=[{month:s.month,title:key==='article'?'벤처스퀘어에게 보도자료 발송':'벤처스퀘어 멘토링',text:key==='article'?'회사 소개 자료와 수치를 담은 보도자료를 게임 속 벤처스퀘어 기자에게 보냈다.':'정우진 멘토와 첫 거래처를 만날 방법을 함께 정리했다.',type:'event'},...(s.journal||[])];
  return s;
 }
 export function articlePreview(state,data){
@@ -54,7 +54,7 @@ export function vsHubView(state,data,{saveLabel=''}={}){
  const btn=(action,label,ok,cls='vsblue',extra='')=>`<button class="g-btn3d ${ok?cls:''}" data-action="${action}" ${extra} ${ok?'':'disabled'}>${label}</button>`;
  const preview=articlePreview(state,data),m=Math.min(state.month,60),when=`${Math.floor((m-1)/12)+1}년 차 ${(m-1)%12+1}월`;
  const cards=[
-  card({cat:'press',title:'벤처스퀘어 기사 신청',src:'new',own:`쿨다운 ${VS_RULES.article.cooldown}개월`,pic:sceneAsset('news',state.month),emo:'📰',chips:chip('영업력 +2')+chip('네트워크 +2'),xp:chip(`미디어 노출 +${VS_RULES.article.media}`,'xp'),desc:`회사 소개 자료와 수치를 게임 속 벤처스퀘어 기자에게 보내요.${art.ok?'':` <b class="g-lock-reason">${esc(art.reason)}</b>`}`,price:'💰 0원 · <span class="g-hp">❤ −4</span>',button:btn('vs-article','신청',art.ok),locked:!art.ok}),
+  card({cat:'press',title:'벤처스퀘어에게 보도자료 발송',src:'new',own:`쿨다운 ${VS_RULES.article.cooldown}개월`,pic:sceneAsset('news',state.month),emo:'📰',chips:chip('영업력 +2')+chip('네트워크 +2'),xp:chip(`미디어 노출 +${VS_RULES.article.media}`,'xp'),desc:`회사 소개 자료와 수치를 담아 게임 속 벤처스퀘어 기자에게 보도자료를 보내요.${art.ok?'':` <b class="g-lock-reason">${esc(art.reason)}</b>`}`,price:'💰 0원 · <span class="g-hp">❤ −4</span>',button:btn('vs-article','발송',art.ok),locked:!art.ok}),
   card({cat:'mentor',title:'멘토링 신청',src:'new',own:`${esc(mentor?.name||'')} 멘토`,person:mentor,emo:'🧑‍🏫',emoBg:'var(--management)',chips:chip('시장 이해 +3')+chip('운영력 +1'),xp:chip(`멘토 호감도 +${VS_RULES.mentoring.relation}`,'xp'),desc:`첫 거래처를 만날 방법을 멘토와 함께 정리해요.${men.ok?'':` <b class="g-lock-reason">${esc(men.reason)}</b>`}`,price:'💰 0원 · <span class="g-hp">❤ −4</span>',button:btn('vs-mentoring','신청',men.ok),locked:!men.ok}),
   card({cat:'ir',title:'🎤 데모데이 IR 참가',own:demo?`한정 · ${demo.label}`:'올해 일정 종료',pic:sceneAsset('pitch',state.month),emo:'🎤',emoBg:'var(--gold)',chips:chip('연말 데모데이','ghost'),xp:chip('투자자 연결','xp'),timer:left(demo),desc:'성과를 공유하고 다음 연결을 만들어요. 11월에 업무를 시작하면 이벤트가 열려요.',price:'달력 일정',button:btn('calendar-year','달력 보기',true,'pink',`data-year="${demo?.year||year}"`),limited:demo?.left===0}),
   card({cat:'ir',title:'투자사 미팅',own:met('foreign_investor')?'만남 완료':'해금: 월 매출 1,000만 원 또는 8개월 차',person:investor,emo:'💼',emoBg:'var(--gold)',chips:chip('네트워크')+chip('해외 시장','ghost'),xp:chip('인물수첩 합류','xp'),desc:canInvestor?`${esc(investor.name)} 심사역이 회사에 관심을 보였어요.`:met('foreign_investor')?'이미 만났어요. 인물수첩에서 관계를 확인해요.':'조건을 채우면 만날 수 있어요.',price:'만남 이벤트',button:btn('meet-person',met('foreign_investor')?'만남 완료':canInvestor?'만나기':'잠김',canInvestor,'vsblue','data-id="foreign_investor"'),locked:!canInvestor&&!met('foreign_investor')}),
@@ -71,8 +71,8 @@ export function vsHubView(state,data,{saveLabel=''}={}){
  <section class="g-cards" aria-label="프로그램 카드">${cards.join('')}</section>
  <aside class="g-hside"><article class="g-panel g-news" aria-label="이번 달 헤드라인"><div class="g-panel-title">📰 이번 달 벤처스퀘어 헤드라인<span class="g-sub">게임 속 가상 기사</span></div><div class="g-ticker"><span class="g-tag">속보</span><div class="g-roll">${[...ticker,...ticker].map((t,i)=>`<span ${i>=ticker.length?'aria-hidden="true"':''}>${t}</span>`).join('')}</div></div>
  <div class="g-article"><div class="g-aimg"><img src="${esc(sceneAsset(state.businessPlace||'home',state.month))}" alt="" loading="lazy" decoding="async" width="1672" height="941"><span class="g-kicker">내 회사 기사 미리보기</span></div><div class="g-abody"><h3>${esc(preview.headline)}</h3><div class="g-meta">게임 속 가상 기사 · ${when}</div><p>${esc(preview.body)}</p><div class="g-note">게임 속 가상 기사예요. 실제 벤처스퀘어 기사가 아니며, 실제 회사·투자사와 관계가 없어요.</div></div></div></article>
- <article class="g-panel g-ach" aria-label="허브 기록"><div class="g-panel-title">🏅 허브 기록<span class="g-sub">이번 도전</span></div><div class="g-medals"><div class="g-medal"><span class="g-m" aria-hidden="true">📰</span>기사 신청<small>${state.vsHub?.articleCount||0}회</small><div class="g-pbar"><i style="width:${Math.min(100,(state.vsHub?.articleCount||0)*20)}%"></i></div></div><div class="g-medal"><span class="g-m" aria-hidden="true">🧑‍🏫</span>멘토링<small>${state.vsHub?.mentoringCount||0}회</small><div class="g-pbar"><i style="width:${Math.min(100,(state.vsHub?.mentoringCount||0)*10)}%"></i></div></div><div class="g-medal"><span class="g-m" aria-hidden="true">📣</span>미디어 노출<small>${media} / 100</small><div class="g-pbar"><i style="width:${media}%"></i></div></div></div><ul class="g-hub-rules"><li>기사 신청은 ${VS_RULES.article.cooldown}개월에 한 번, 멘토링은 ${VS_RULES.mentoring.cooldown}개월에 한 번 할 수 있어요.</li><li>미디어 노출도는 매달 ${VS_RULES.mediaDecay}씩 줄고, 새 고객 유입을 최대 25%까지 늘려요.</li><li>행사·투자자 만남은 기존 달력·인물 규칙을 그대로 따라요.</li></ul></article></aside></main>
- <footer class="g-hub-foot"><span class="g-pts"><span class="g-ico" aria-hidden="true">💰</span><span class="g-num">${num(state.cash)}만 원</span></span><span class="g-hint">허브 프로그램은 게임 속 가상 프로그램이에요. 신청하면 바로 반영되고, 4주 일정과는 별도예요.</span><button class="g-btn3d gold g-cta" data-action="vs-article" ${art.ok?'':'disabled'}>📰 기사 신청하기</button></footer>`;
+ <article class="g-panel g-ach" aria-label="허브 기록"><div class="g-panel-title">🏅 허브 기록<span class="g-sub">이번 도전</span></div><div class="g-medals"><div class="g-medal"><span class="g-m" aria-hidden="true">📰</span>보도자료 발송<small>${state.vsHub?.articleCount||0}회</small><div class="g-pbar"><i style="width:${Math.min(100,(state.vsHub?.articleCount||0)*20)}%"></i></div></div><div class="g-medal"><span class="g-m" aria-hidden="true">🧑‍🏫</span>멘토링<small>${state.vsHub?.mentoringCount||0}회</small><div class="g-pbar"><i style="width:${Math.min(100,(state.vsHub?.mentoringCount||0)*10)}%"></i></div></div><div class="g-medal"><span class="g-m" aria-hidden="true">📣</span>미디어 노출<small>${media} / 100</small><div class="g-pbar"><i style="width:${media}%"></i></div></div></div><ul class="g-hub-rules"><li>보도자료 발송은 ${VS_RULES.article.cooldown}개월에 한 번, 멘토링은 ${VS_RULES.mentoring.cooldown}개월에 한 번 할 수 있어요.</li><li>미디어 노출도는 매달 ${VS_RULES.mediaDecay}씩 줄고, 새 고객 유입을 최대 25%까지 늘려요.</li><li>행사·투자자 만남은 기존 달력·인물 규칙을 그대로 따라요.</li></ul></article></aside></main>
+ <footer class="g-hub-foot"><span class="g-pts"><span class="g-ico" aria-hidden="true">💰</span><span class="g-num">${num(state.cash)}만 원</span></span><span class="g-hint">허브 프로그램은 게임 속 가상 프로그램이에요. 신청하면 바로 반영되고, 4주 일정과는 별도예요.</span><button class="g-btn3d gold g-cta" data-action="vs-article" ${art.ok?'':'disabled'}>📰 보도자료 발송하기</button></footer>`;
 }
 export function filterHub(btn){
  const root=btn.closest('.g-hub'),cat=btn.dataset.hubFilter;if(!root)return;
