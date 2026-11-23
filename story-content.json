@@ -1432,7 +1432,7 @@
       "age": 55,
       "bio": "사업의 기본과 오래가는 선택을 함께 살피는 선배.",
       "focus": "신뢰 · 현금 · 품질",
-      "file": "npc-mentor.png"
+      "file": "npc-mentor.webp"
     },
     {
       "id": "investor",
@@ -1441,7 +1441,7 @@
       "age": 45,
       "bio": "가능성을 숫자로 확인한다. 빠른 성장과 투명한 공유를 기대한다.",
       "focus": "성장 · 속도 · 신뢰",
-      "file": "npc-investor.png"
+      "file": "npc-investor.webp"
     },
     {
       "id": "cofounder",
@@ -1450,7 +1450,7 @@
       "age": 32,
       "bio": "제품과 팀을 함께 책임진다. 무리한 속도보다 완성도를 챙긴다.",
       "focus": "품질 · 팀 · 현금",
-      "file": "npc-cofounder.png"
+      "file": "npc-cofounder.webp"
     },
     {
       "id": "staff",
@@ -1459,7 +1459,7 @@
       "age": 26,
       "bio": "현장의 작은 문제를 먼저 발견한다. 지킬 수 있는 약속을 원한다.",
       "focus": "사람 · 안정 · 품질",
-      "file": "npc-staff.png"
+      "file": "npc-staff.webp"
     },
     {
       "id": "friend",
@@ -1468,7 +1468,7 @@
       "age": 35,
       "bio": "회사 밖의 나를 기억하는 친구. 일보다 생활과 건강을 먼저 묻는다.",
       "focus": "건강 · 사람",
-      "file": "npc-friend.png"
+      "file": "npc-friend.webp"
     },
     {
       "id": "partner",
@@ -1477,7 +1477,7 @@
       "age": 34,
       "bio": "회사의 성장만큼 둘의 생활도 중요하다. 함께 정한 한계선을 기억한다.",
       "focus": "건강 · 생활 · 약속",
-      "file": "npc-partner.png"
+      "file": "npc-partner.webp"
     },
     {
       "id": "family",
@@ -1486,7 +1486,7 @@
       "age": 68,
       "bio": "새로운 도전을 응원하면서도 생활이 무너지지 않을지 걱정한다.",
       "focus": "안정 · 현금 · 건강",
-      "file": "npc-family.png"
+      "file": "npc-family.webp"
     },
     {
       "id": "customer",
@@ -1495,7 +1495,7 @@
       "age": 39,
       "bio": "제품을 계속 쓰는 이유가 분명한 고객. 품질과 솔직한 안내를 중요하게 본다.",
       "focus": "품질 · 신뢰",
-      "file": "npc-customer.png"
+      "file": "npc-customer.webp"
     }
   ]
 }

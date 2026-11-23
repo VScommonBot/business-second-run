@@ -20,7 +20,7 @@ function drawIcon(ctx,key,x,y,color='#2860ed'){
 export function shareFileName(card){return `모두의창업-${card.name.replace(/[^\p{L}\p{N}_-]/gu,'').slice(0,12)||'대표'}-${card.keyword}.png`;}
 export async function renderResultCard(card){
  const mood=endingMood(card.ending);
- const [background,portrait,logo]=await Promise.all([loadImage(card.background),loadImage(card.standing||card.portrait),loadImage('assets/mv-logo-blue.png')]);
+ const [background,portrait,logo]=await Promise.all([loadImage(card.background),loadImage(card.standing||card.portrait),loadImage('assets/mv-logo-blue.webp')]);
  await document.fonts.ready;
  const canvas=document.createElement('canvas');canvas.width=W;canvas.height=H;
  const ctx=canvas.getContext('2d');if(!ctx)throw new Error('이 브라우저에서 이미지를 만들 수 없어요.');

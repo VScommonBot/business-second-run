@@ -220,7 +220,7 @@ async function handleStoryAction(action,b){
 
  if(action==='custom-photo'&&state.mode==='custom'){modalOpen('내 캐릭터 사진',`<label class="quiet">사진 첨부 · 교체<input class="sr-only" id="custom-portrait-file" type="file" accept="image/png,image/jpeg,image/webp"></label><p id="custom-photo-status" class="career-note">PNG · JPG · WebP, 8MB 이하</p><button class="quiet" data-action="clear-custom-photo">기본 캐릭터 그림으로</button>`);return true;}
  if(action==='clear-custom-photo'&&state.mode==='custom'){delete state.customPortrait;save();modal.close();render();return true;}
- if(action==='guide-photo'){const shot=GUIDE_SHOTS.find(x=>x.id===id);if(shot)modalOpen(shot.title,`<img class="guide-photo-full" src="assets/guide-${shot.id}.jpg?v=14" alt="${shot.title} 실제 플레이 화면"><p class="guide-photo-description">${shot.text}</p>`,'','guide-photo');return true;}
+ if(action==='guide-photo'){const shot=GUIDE_SHOTS.find(x=>x.id===id);if(shot)modalOpen(shot.title,`<img class="guide-photo-full" src="assets/guide-${shot.id}.webp?v=14" alt="${shot.title} 실제 플레이 화면"><p class="guide-photo-description">${shot.text}</p>`,'','guide-photo');return true;}
  if(action==='reading'){const reader=readingView(id,data);if(reader){readerReturn=modal.open?{html:modal.innerHTML,className:modal.className,flow:modal.dataset.flow,scroll:modal.scrollTop}:null;modalOpen(reader.title,reader.body,'','reader');}return true;}
  if(action==='reading-back'||action==='close'&&modal.dataset.flow==='reader'){if(readerReturn){modal.innerHTML=readerReturn.html;modal.className=readerReturn.className;modal.dataset.flow=readerReturn.flow;modal.scrollTop=readerReturn.scroll;readerReturn=null;}else modal.close();return true;}
  if(action==='resume-current'){if(state)resumeGame();return true;}
