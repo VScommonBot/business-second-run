@@ -1,7 +1,8 @@
 import {statIcon} from './stat-view.js';
 import {endingMood,drawMoodAtmosphere} from './ending-mood.js';
 
-export const SHARE_URL='https://business-second-run-live-editor.ighdd678.chatgpt.site/';
+import {GAME_URL,isPlaceholderUrl} from './site-config.js';
+export const SHARE_URL=GAME_URL;
 const W=1200,H=1500;
 let cachedKey='',cachedPromise;
 function loadImage(src){return new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=()=>reject(new Error('카드 그림을 불러오지 못했어요.'));img.src=src;});}
@@ -36,8 +37,12 @@ export async function renderResultCard(card){
  fitText(ctx,`${card.place} · ${card.season}`,80,778,1020,28,'#1e2c49');
  const stats=[['runway','보낸 시간',`${card.months}개월`],['career','대표 레벨',`Lv. ${card.level}`],['team','고객',`${Math.round(card.customers).toLocaleString('ko-KR')}명`],['cash','회사 현금',`${Math.round(card.cash).toLocaleString('ko-KR')}만 원`]];
  stats.forEach(([icon,label,value],i)=>{const x=72+(i%2)*546,y=870+Math.floor(i/2)*204;rounded(ctx,x,y,510,176,22,'#fff');drawIcon(ctx,icon,x+28,y+29,mood.accent);fitText(ctx,label,x+80,y+58,400,27,'#58708e');fitText(ctx,value,x+30,y+126,450,43);});
- fitText(ctx,'모두의 창업: CEO로 살아남기',72,1380,1056,32,'#2860ed',600);
- fitText(ctx,mood.caption,72,1431,1056,26,mood.accent);
+ fitText(ctx,'모두의 창업: CEO로 살아남기',72,1372,860,32,'#2860ed',600);
+ fitText(ctx,mood.caption,72,1418,860,26,mood.accent);
+ // Game URL + QR slot: placeholders until the public address is fixed (site-config.js).
+ fitText(ctx,isPlaceholderUrl(SHARE_URL)?'게임 주소 · 공개 후 표시':SHARE_URL.replace(/^https?:\/\//,''),72,1462,860,22,'#58708e');
+ ctx.save();ctx.setLineDash([10,8]);ctx.lineWidth=3;ctx.strokeStyle='#9fb2cf';rounded(ctx,1000,1318,128,128,14);ctx.stroke();ctx.restore();
+ fitText(ctx,'QR',1040,1392,60,30,'#9fb2cf',700);fitText(ctx,'공개 후 삽입',1006,1478,120,18,'#9fb2cf');
  const blob=await new Promise((resolve,reject)=>canvas.toBlob(value=>value?resolve(value):reject(new Error('이미지 저장에 실패했어요.')),'image/png'));
  return {blob,file:new File([blob],shareFileName(card),{type:'image/png'}),url:URL.createObjectURL(blob)};
 }
