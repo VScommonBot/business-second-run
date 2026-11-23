@@ -34,7 +34,7 @@ export function buyFurnishing(state,id){
 export function furnishingShop(state){
  const rack=group=>furnishings.filter(item=>item.group===group).map(item=>{
   const blocked=purchaseBlock(state,item),owned=blocked==='보유 중';
-  const art=group==='rug'?`<i class="shop-rug rug-${item.id}"></i>`:`<img src="assets/office/${item.id}.webp" alt="">`;
+  const art=group==='rug'?`<i class="shop-rug rug-${item.id}"></i>`:`<img src="assets/office/${item.id}.webp" alt="" loading="lazy" decoding="async">`;
   return `<article class="furnishing-card"><div class="furnishing-art">${art}</div><h3>${item.name}</h3><p>${item.price}만 원</p>${owned?`<button class="quiet" data-view="office">보유 중 · 꾸미기</button>`:`<button class="primary" data-action="office-buy" data-id="${item.id}" aria-label="${item.name} ${item.price}만 원 ${blocked||'구매'}" ${blocked?'disabled':''}>${blocked||'구매하기'}</button>`}</article>`;
  }).join('');
  return `<div class="furnishing-shop"><header><strong>보유 현금 ${Math.round(state.cash).toLocaleString('ko-KR')}만 원</strong><button class="quiet" data-view="office">내 사무실 꾸미기</button></header>${['rug','decor'].map(key=>`<section><h2>${groups[key].title}</h2><div class="furnishing-rack">${rack(key)}</div></section>`).join('')}</div>`;
@@ -55,7 +55,7 @@ function picker(state,key,disabled=false){
  const {title,options}=groups[key],selected=choice(state,key);
  return `<fieldset class="office-picker" ${disabled?'disabled':''}><legend>${title}</legend><div>${Object.entries(options).map(([id,label])=>{
   const pressed=id===selected,locked=['rug','decor'].includes(key)&&id!=='none'&&!inventory(state).includes(id);
-  const thumb=['pet','decor'].includes(key)&&id!=='none'?`<img alt="" src="assets/office/${id}.webp">`:key==='rug'&&id!=='none'?`<i aria-hidden="true" class="rug-swatch rug-${id}"></i>`:'';
+  const thumb=['pet','decor'].includes(key)&&id!=='none'?`<img alt="" src="assets/office/${id}.webp" loading="lazy" decoding="async">`:key==='rug'&&id!=='none'?`<i aria-hidden="true" class="rug-swatch rug-${id}"></i>`:'';
   return `<button type="button" data-action="office-pick" data-group="${key}" data-id="${id}" aria-pressed="${pressed}" ${locked?'disabled':''}>${thumb}${label}${locked?' · 미보유':''}</button>`;
  }).join('')}</div></fieldset>`;
 }

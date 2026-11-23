@@ -100,7 +100,11 @@ export function migrateState(saved,data){
  if(n.pending){const raw=data.events.find(e=>e.id===n.pending.id);if(raw)n.pending=adaptEvent(raw,n);}
  n.monthlyFixed=costs(n,data);return n;
 }
-export function forecast(s,data){let health=s.health;const cost=s.plan.reduce((n,id)=>n+ACTIONS.find(a=>a.id===id).cost,0);for(const id of s.plan){const a=ACTIONS.find(a=>a.id===id);health=clamp(health+a.health+(a.health<0&&s.items.includes('chair')?2:0));}const bonus=monthlyTraitEffects(s);health=clamp(health+bonus.health);health=clamp(health+(signatureEffects(s).health||0));return {cost,fixed:costs(s,data),health:clamp(health+(s.items.includes('plant')?5:0)),cashAfterCosts:s.cash-cost-costs(s,data)};}
+// Difficulty balance: harder runs grow skills more slowly, tire faster and win customers more slowly.
+export const DIFFICULTY_BALANCE={easy:{growth:1.1,drain:.9,demand:1.1,churn:0},normal:{growth:1,drain:1,demand:1,churn:0},hard:{growth:.8,drain:1.15,demand:.8,churn:.015},hardcore:{growth:.65,drain:1.3,demand:.65,churn:.03}};
+export const balanceFor=s=>s?.mode==='custom'?DIFFICULTY_BALANCE.normal:DIFFICULTY_BALANCE[s?.difficulty]||DIFFICULTY_BALANCE.normal;
+export const actionHealth=(s,a)=>a.health<0?Math.round(a.health*balanceFor(s).drain)+(s.items?.includes('chair')?2:0):a.health;
+export function forecast(s,data){let health=s.health;const cost=s.plan.reduce((n,id)=>n+ACTIONS.find(a=>a.id===id).cost,0);for(const id of s.plan){const a=ACTIONS.find(a=>a.id===id);health=clamp(health+actionHealth(s,a));}const bonus=monthlyTraitEffects(s);health=clamp(health+bonus.health);health=clamp(health+(signatureEffects(s).health||0));return {cost,fixed:costs(s,data),health:clamp(health+(s.items.includes('plant')?5:0)),cashAfterCosts:s.cash-cost-costs(s,data)};}
 export function planAction(s,id){if(s.pending||s.ending||s.plan.length===4||!ACTIONS.some(a=>a.id===id))return s;if(requiresProduct(s)&&s.plan.length===3&&!s.plan.includes('build')&&id!=='build')return s;const n=copy(s);n.plan.push(id);return n;}
 export function removePlan(s,i){if(s.pending||s.ending)return s;const n=copy(s);n.plan.splice(i,1);return n;}
 function learn(s,id){if(id&&!s.lessons.includes(id))s.lessons.push(id);}
@@ -112,17 +116,17 @@ export function runMonth(state,data){
  const scheduled=requestScheduledEvent(state);if(scheduled!==state)return {state:scheduled,calendar:true};
  const f=forecast(state,data);if(f.cashAfterCosts<0)return {state,error:'활동비와 고정비가 부족해요. 자금 대책을 확인하거나 일정을 조정해 주세요.'};
  const s=copy(state),before=state,rows=[];const checkpointId=captureCheckpoint(s,'month',`${s.month}개월 차 일정`,s.month);s.cash-=f.cost;
- for(const id of s.plan){const a=ACTIONS.find(x=>x.id===id);let factor=s.health<25?.6:1;if(s.items.includes('notebook')&&['research','study'].includes(id))factor*=1.2;if(s.items.includes('laptop')&&id==='build')factor*=1.25;const gains={};for(const [k,v]of Object.entries(a.fx)){const newv=clamp(s.skills[k]+Math.round(v*factor));gains[k]=newv-s.skills[k];s.skills[k]=newv;}s.health=clamp(s.health+a.health+(a.health<0&&s.items.includes('chair')?2:0));s.xp+=a.xp;learn(s,a.lesson);if(id==='study')learn(s,data.lessons.find(l=>!s.lessons.includes(l.id))?.id);rows.push({name:a.name,health:a.health+(a.health<0&&s.items.includes('chair')?2:0),gains});}
+ for(const id of s.plan){const a=ACTIONS.find(x=>x.id===id);let factor=s.health<25?.6:1;if(s.items.includes('notebook')&&['research','study'].includes(id))factor*=1.2;if(s.items.includes('laptop')&&id==='build')factor*=1.25;const gains={};for(const [k,v]of Object.entries(a.fx)){const newv=clamp(s.skills[k]+Math.round(v*factor*balanceFor(s).growth));gains[k]=newv-s.skills[k];s.skills[k]=newv;}s.health=clamp(s.health+actionHealth(s,a));s.xp+=a.xp;learn(s,a.lesson);if(id==='study')learn(s,data.lessons.find(l=>!s.lessons.includes(l.id))?.id);rows.push({name:a.name,health:actionHealth(s,a),gains});}
  const bonus=monthlyTraitEffects(s);for(const [key,value]of Object.entries(bonus)){if(key==='health'){const before=s.health;s.health=clamp(s.health+value);bonus[key]=s.health-before;}else{const before=s.skills[key];s.skills[key]=clamp(s.skills[key]+value);bonus[key]=s.skills[key]-before;}}
  const spaceEffects=locationBonus(s.businessPlace);for(const [key,value]of Object.entries(spaceEffects)){const old=s.skills[key];s.skills[key]=clamp(old+value);spaceEffects[key]=s.skills[key]-old;}
  const signature=signatureEffects(s);applyEffects(s,signature);
  const ind=data.industries[s.industry];let newCustomers=0;
- if(s.skills.product>=30){const salesWeeks=s.plan.filter(x=>x==='sales').length;newCustomers=Math.max(1,Math.round((s.skills.sales*.11+s.skills.insight*.06+s.skills.network*.04+salesWeeks*4)*(0.9+random(s)*.2)*Math.max(.1,1+(s.demandMod??0))));s.customers=Math.max(0,Math.round(s.customers*(1-clamp((ind.churn||.07)+(s.churnMod??0),0,.9))))+newCustomers;}
+ if(s.skills.product>=30){const salesWeeks=s.plan.filter(x=>x==='sales').length;newCustomers=Math.max(1,Math.round((s.skills.sales*.11+s.skills.insight*.06+s.skills.network*.04+salesWeeks*4)*(0.9+random(s)*.2)*Math.max(.1,1+(s.demandMod??0))*balanceFor(s).demand*(1+Math.min(100,s.media||0)/400)));s.customers=Math.max(0,Math.round(s.customers*(1-clamp((ind.churn||.07)+(s.churnMod??0)+balanceFor(s).churn,0,.9))))+newCustomers;}
  s.revenue=Math.round(s.customers*ind.arpu*(.7+s.skills.product/100)*Math.max(.1,1+(s.arpuMod??0)));
  const running=Math.round(s.revenue*clamp((ind.cogs||.25)+(s.worldCost??0),0,.95))+f.fixed;s.profit=s.revenue-running-f.cost;s.cash+=s.revenue-running;if(s.items.includes('plant'))s.health=clamp(s.health+5);s.cash=Math.round(s.cash);s.monthlyExpense=running+f.cost;
  s.history.push({month:s.month,revenue:s.revenue,profit:s.profit,cash:s.cash,health:s.health,skills:{...s.skills},before:{cash:before.cash,revenue:before.revenue,customers:before.customers,health:before.health,skills:{...before.skills}},expense:s.monthlyExpense,actions:[...s.plan],spaceEffects:{...spaceEffects},customers:s.customers,team:s.team,equity:s.equity,businessPlace:s.businessPlace});
  const report={month:s.month,rows,traitEffects:bonus,signatureEffects:signature,spaceEffects,newCustomers,revenue:s.revenue,expense:running+f.cost,profit:s.profit,health:s.health-before.health,skills:Object.fromEntries(Object.keys(SKILLS).map(k=>[k,s.skills[k]-before.skills[k]]))};
- s.plan=[];s.month++;
+ s.plan=[];s.month++;if(s.media)s.media=Math.max(0,s.media-3);
  const due=(s.delayed||[]).filter(d=>d.month<=s.month-1);s.delayed=(s.delayed||[]).filter(d=>d.month>s.month-1);
  for(const d of due){applyEffects(s,adaptEffects(d.fx,s));applyContext(s,d.fx);s.journal.unshift({month:s.month-1,title:'이전 선택의 후속 결과',text:d.text,type:'event'});}
  roundMoney(s);
@@ -131,7 +135,7 @@ export function runMonth(state,data){
 }
 export function nextEvent(s,data){
  const queued=s.queuedEvents?.shift();if(queued){const raw=data.events.find(e=>e.id===queued);if(raw&&eventAvailability(s,raw,data).ok)return adaptEvent(raw,s);}
- if((s.month-1)%10===0&&data.worldEvents?.length){const pool=data.worldEvents.filter(w=>!s.seenEvents.includes('world_'+w.id));const world=(pool.length?pool:data.worldEvents)[Math.floor(random(s)*(pool.length||data.worldEvents.length))];return adaptEvent({id:'world_'+world.id,title:world.headline,text:`${world.label} 상황에서 회사의 다음 방향을 정해 주세요.`,choices:world.branches.map(b=>({...b,label:b.label+' · '+b.text.replace(/\n/g,' '),next:b.follow}))},s);}
+ if((s.month-1)%10===0&&data.worldEvents?.length){const fits=data.worldEvents.filter(w=>!w.ind||w.ind.includes(s.industry));const pool=fits.filter(w=>!s.seenEvents.includes('world_'+w.id));const world=(pool.length?pool:fits)[Math.floor(random(s)*(pool.length||fits.length))];return adaptEvent({id:'world_'+world.id,title:world.headline,text:`${world.label} 상황에서 회사의 다음 방향을 정해 주세요.`,choices:world.branches.map(b=>({...b,label:b.label+' · '+b.text.replace(/\n/g,' '),next:b.follow}))},s);}
  const industryEvent=data.events.find(e=>e.industryMonth&&e.ind===s.industry&&!s.seenEvents.includes(e.id)&&eventAvailability(s,e,data).ok);
  if(industryEvent)return adaptEvent(industryEvent,s);
  const relationshipEvent=nextRelationshipEvent(s);if(relationshipEvent)return adaptEvent(relationshipEvent,s);

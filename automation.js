@@ -20,6 +20,8 @@ export function autoChoiceScore(state,choice){
  return score;
 }
 export function pickAutoChoice(state){
+ // After repeated failed rescues in one month, AUTO accepts closing instead of looping forever.
+ if(state.pending?.id==='e_rescue'&&state.autoRescue?.month===state.month&&state.autoRescue.count>3){const end=state.pending.choices.findIndex(c=>c.end&&choiceAvailability(state,c).ok);if(end>=0)return end;}
  return state.pending?.choices.map((choice,index)=>({choice,index,score:autoChoiceScore(state,choice)}))
   .filter(x=>choiceAvailability(state,x.choice).ok).sort((a,b)=>b.score-a.score||a.index-b.index)[0]?.index??-1;
 }
@@ -41,6 +43,12 @@ export function autoPlan(state,data){
  return (candidates.find(x=>x.f.cashAfterCosts>=0)||candidates.sort((a,b)=>a.f.cost-b.f.cost)[0]).plan;
 }
 export function advanceAutomated(state,data){
+ const result=advanceAutomatedStep(state,data);
+ // Any AUTO step marks the run as assisted: no S grade, achievements or special-character unlocks.
+ if(result.state&&result.state!==state&&!result.state.autoAssisted)result.state={...result.state,autoAssisted:true};
+ return result;
+}
+function advanceAutomatedStep(state,data){
  if(state.initialPlan&&!state.initialPlan.completed)return {state:finishInitialPlan(state,data),kind:'plan'};
  if(state.lastScene?.unread)return {state:acknowledgeScene(state),kind:'acknowledge'};
  if(state.ending)return {state,kind:'ending'};
@@ -58,7 +66,8 @@ export function advanceAutomated(state,data){
  }
  const s={...state,plan:autoPlan(state,data)};
  if(forecast(s,data).cashAfterCosts<0){
-  const next=requestFinancing(s,data);
+  const tries=state.autoRescue?.month===state.month?state.autoRescue.count+1:1;
+  const next={...requestFinancing(s,data),autoRescue:{month:state.month,count:tries}};
   return next.pending?{state:next,kind:'event'}:{state,kind:'blocked',error:'자금을 마련하지 못해 자동 진행을 멈췄어요.'};
  }
  const result=runMonth(s,data);

@@ -464,6 +464,20 @@
         "end": "close",
         "out": "문을 닫았다."
       }
+    ],
+    "ind": [
+      "saas",
+      "ecommerce",
+      "education",
+      "local_service",
+      "ai_agency",
+      "game_studio",
+      "design_studio",
+      "devtools",
+      "campus_events",
+      "venture_studio",
+      "sensor_lab",
+      "influencer"
     ]
   }
 ]

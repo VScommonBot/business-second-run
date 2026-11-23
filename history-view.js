@@ -10,7 +10,7 @@ export const importantRecord=row=>typeof row.choice==='string'&&!!row.choice.tri
 export function recordScene(state,data,row){
  const event=data.events.find(e=>e.id===row.eventId||e.title===row.title),who=row.who||event?.who||'mentor',person=data.story.cast.find(p=>p.id===who)||data.story.cast.find(p=>p.id==='mentor');
  const place=row.businessPlace||eventLocation({pending:{who}}),portrait=row.type==='event'&&person?person.file:standingFile(state.portrait);
- return `<div class="record-scene"><img class="record-backdrop" src="${sceneAsset(place,row.month)}" alt="${SEASONS[seasonForMonth(row.month)]}의 기록 장면" loading="lazy"><img class="record-person" src="${row.type==='event'?'assets/'+portrait:portraitSource(state,'assets/'+portrait)}" alt="${esc(row.type==='event'&&person?person.name:state.name+' 대표')}" loading="lazy"><span>${esc(typeLabel(row))}</span></div>`;
+ return `<div class="record-scene"><img class="record-backdrop" src="${sceneAsset(place,row.month)}" alt="${SEASONS[seasonForMonth(row.month)]}의 기록 장면" loading="lazy"><img class="record-person" src="${row.type==='event'?'assets/'+portrait:portraitSource(state,'assets/'+portrait)}" loading="lazy" decoding="async" alt="${esc(row.type==='event'&&person?person.name:state.name+' 대표')}" loading="lazy"><span>${esc(typeLabel(row))}</span></div>`;
 }
 export function historyJournal(state,data,selectedYear='all'){
  const rows=(state.journal||[]).map((row,index)=>({...row,index})).filter(importantRecord).sort((a,b)=>a.month-b.month||b.index-a.index),years=[...new Set(rows.map(row=>yearOf(row.month)))].sort((a,b)=>a-b),current=years.at(-1);

@@ -15,7 +15,7 @@ export function resultCardPreview(card){
  const mood=endingMood(card.ending);
  return `<div class="result-postcard" data-mood="${esc(card.ending)}" data-atmosphere="${mood.effect}" style="${moodStyle(mood)}" aria-label="${esc(card.name)} 대표의 ${esc(card.keyword)} 결과 카드">
   <img class="postcard-background" src="${esc(card.background)}" alt="${esc(card.keyword)} 엔딩 일러스트">
-  <div class="postcard-shade"></div><div class="postcard-atmosphere" aria-hidden="true"></div><div class="postcard-brand"><img src="assets/mv-logo-blue.png" alt="">모두의 창업</div>
+  <div class="postcard-shade"></div><div class="postcard-atmosphere" aria-hidden="true"></div><div class="postcard-brand"><img src="assets/mv-logo-blue.webp" alt="">모두의 창업</div>
   <div class="postcard-title"><span>나의 창업 엔딩</span><strong>${esc(card.keyword)}</strong><p>${card.months}개월의 기록</p></div>
   <img class="postcard-portrait" src="${esc(card.standing||card.portrait)}" alt="${esc(card.name)} 대표 캐릭터">
   <div class="postcard-person"><strong>${esc(card.name)} 대표</strong><span>${esc(card.industry)}</span></div>
@@ -52,7 +52,7 @@ export function endingView(state,data){
  <p class="end-footnote">누적 매출·손익은 ${state.history?.length||0}개월의 월말 정산 합계예요. 사건의 현금 효과·투자금·대출금은 월간 손익에 포함되지 않아요.</p>${financeView(r)}</section>
  <section class="card end-report-section" id="ending-life"><div class="end-section-heading"><span>03</span><div><h2>나에게 남은 것</h2><p>재산, 건강, 인간관계, 평판을 함께 돌아봐요.</p></div></div>
  <div class="life-outcomes"><article>${statSymbol('reserve','재산')}<strong>${f.known?money(f.wealth):'기록 없음'}</strong></article><article>${statSymbol('health','건강')}<strong>${r.health.final} / 100</strong></article><article>${statSymbol('network','인간관계')}<strong>${r.relations.length}명</strong></article><article>${statSymbol('sales','평판')}<strong>${r.reputation.value} / 100</strong></article></div>
- <details class="end-relations-fold"><summary>인간관계 <span>${r.relations.length}명</span></summary><div class="end-relation-cards">${r.relations.map(person=>`<button data-action="person" data-id="${esc(person.id)}"><img src="assets/${esc(person.file||'npc-mentor.png')}" alt="" loading="lazy"><strong>${esc(person.name)}</strong><span class="${person.value<0?'is-negative':''}">${person.value} / 100</span></button>`).join('')||'<p>기록된 인물이 없어요.</p>'}</div></details></section>
+ <details class="end-relations-fold"><summary>인간관계 <span>${r.relations.length}명</span></summary><div class="end-relation-cards">${r.relations.map(person=>`<button data-action="person" data-id="${esc(person.id)}"><img src="assets/${esc(person.file||'npc-mentor.webp')}" alt="" loading="lazy"><strong>${esc(person.name)}</strong><span class="${person.value<0?'is-negative':''}">${person.value} / 100</span></button>`).join('')||'<p>기록된 인물이 없어요.</p>'}</div></details></section>
  <section class="card end-report-section" id="ending-readings"><div class="end-section-heading"><span>04</span><div><h2>이 결말 다음에 읽는 아침편지</h2><p>명승은의 그만의 아침편지에서, 이번 도전과 이어지는 글.</p></div></div>
  <div class="ending-readings">${r.readings.map(ref=>`<button class="ending-reading" data-action="reading" data-id="${esc(ref.id)}"><span>${ref.kind==='letter'?'아침편지':ref.kind==='video'?'관련 영상':'창업 FAQ'} · 이 안에서 읽기</span><h3>${esc(ref.title)}</h3>${ref.gist?`<p>${esc(ref.gist)}</p>`:''}<small>추천 이유 · ${esc(ref.reason)}</small></button>`).join('')}</div><p class="end-footnote">원본 게임에 연결된 글·자료를 바탕으로 골랐어요. 추천 이유는 이번 엔딩과의 연결 설명이며, 원문 인용이 아니에요.</p></section>
  </div>`;

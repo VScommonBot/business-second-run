@@ -21,9 +21,13 @@ export function rollTraits(rng=Math.random){
 export function rollGauges(ageGroup='30s',rng=Math.random){return Object.fromEntries(Object.entries(GAUGE_RANGES[ageGroup]||GAUGE_RANGES['30s']).map(([k,[min,max]])=>[k,draw(rng,min,max)]));}
 export function normalizeGauges(g={}){return Object.fromEntries(Object.keys(GAUGES).map(k=>[k,bound(Number.isFinite(Number(g[k]))?Math.round(Number(g[k])):50,1,100)]));}
 export function conditionDifficulty(g){const score=Math.round(Object.entries(WEIGHTS).reduce((n,[k,w])=>n+g[k]*w,0)*100)/100;return {score:Math.round(score*10)/10,stars:bound(6-Math.ceil(score/20),1,5)};}
-export function gaugeDescription(k,n){
+// Career years must fit the portrait's age: a founder in their 20s cannot show 11+ years or an executive title.
+export const CAREER_YEAR_CAP={'20s':8,'30s':15,'40s':25,'50s':32};
+export function careerYears(n,ageGroup='30s'){return Math.round(bound(n,0,100)/100*(CAREER_YEAR_CAP[ageGroup]??CAREER_YEAR_CAP['30s']));}
+export function careerTitle(years){return years<=4?'실무자':years<=12?'관리자':'임원급';}
+export function gaugeDescription(k,n,ageGroup='30s'){
  if(k==='edu')return n<=20?'고졸 이하':n<=40?'전문대':n<=65?'대졸':n<=85?'석사':'박사';
- if(k==='career')return `${n<=33?'실무자':n<=66?'관리자':'임원급'} · ${Math.round(n*.3)}년`;
+ if(k==='career'){const y=careerYears(n,ageGroup);return `${careerTitle(y)} · ${y}년`;}
  if(k==='looks')return '첫 만남의 호감 · 초상화와 별도';
  if(k==='skill')return n>=67?'직접 구현 가능 · 매달 제품 일정 1주 필수':'업종 실무 숙련도';
  return '시작 자금과 개인 비상금에 반영';
