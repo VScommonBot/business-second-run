@@ -1,7 +1,7 @@
 import {statIcon} from './stat-view.js';
 import {endingMood,drawMoodAtmosphere} from './ending-mood.js';
 
-import {GAME_URL,isPlaceholderUrl} from './site-config.js';
+import {GAME_URL,GAME_QR,isPlaceholderUrl} from './site-config.js';
 export const SHARE_URL=GAME_URL;
 const W=1200,H=1500;
 let cachedKey='',cachedPromise;
@@ -21,6 +21,7 @@ export function shareFileName(card){return `모두의창업-${card.name.replace(
 export async function renderResultCard(card){
  const mood=endingMood(card.ending);
  const [background,portrait,logo]=await Promise.all([loadImage(card.background),loadImage(card.standing||card.portrait),loadImage('assets/mv-logo-blue.webp')]);
+ const qr=isPlaceholderUrl(SHARE_URL)?null:await loadImage(GAME_QR).catch(()=>null);
  await document.fonts.ready;
  const canvas=document.createElement('canvas');canvas.width=W;canvas.height=H;
  const ctx=canvas.getContext('2d');if(!ctx)throw new Error('이 브라우저에서 이미지를 만들 수 없어요.');
@@ -39,10 +40,11 @@ export async function renderResultCard(card){
  stats.forEach(([icon,label,value],i)=>{const x=72+(i%2)*546,y=870+Math.floor(i/2)*204;rounded(ctx,x,y,510,176,22,'#fff');drawIcon(ctx,icon,x+28,y+29,mood.accent);fitText(ctx,label,x+80,y+58,400,27,'#58708e');fitText(ctx,value,x+30,y+126,450,43);});
  fitText(ctx,'모두의 창업: CEO로 살아남기',72,1372,860,32,'#2860ed',600);
  fitText(ctx,mood.caption,72,1418,860,26,mood.accent);
- // Game URL + QR slot: placeholders until the public address is fixed (site-config.js).
+ // 게임 주소와 QR(site-config.js). QR은 흰 바탕 위에 픽셀 그대로 그려 스캔이 잘 되게 합니다.
  fitText(ctx,isPlaceholderUrl(SHARE_URL)?'게임 주소 · 공개 후 표시':SHARE_URL.replace(/^https?:\/\//,''),72,1462,860,22,'#58708e');
- ctx.save();ctx.setLineDash([10,8]);ctx.lineWidth=3;ctx.strokeStyle='#9fb2cf';rounded(ctx,1000,1318,128,128,14);ctx.stroke();ctx.restore();
- fitText(ctx,'QR',1040,1392,60,30,'#9fb2cf',700);fitText(ctx,'공개 후 삽입',1006,1478,120,18,'#9fb2cf');
+ if(qr){rounded(ctx,984,1302,160,160,14,'#fff');ctx.save();ctx.imageSmoothingEnabled=false;ctx.drawImage(qr,992,1310,144,144);ctx.restore();fitText(ctx,'게임 바로가기',1012,1484,120,18,'#58708e');}
+ else{ctx.save();ctx.setLineDash([10,8]);ctx.lineWidth=3;ctx.strokeStyle='#9fb2cf';rounded(ctx,1000,1318,128,128,14);ctx.stroke();ctx.restore();
+ fitText(ctx,'QR',1040,1392,60,30,'#9fb2cf',700);fitText(ctx,'공개 후 삽입',1006,1478,120,18,'#9fb2cf');}
  const blob=await new Promise((resolve,reject)=>canvas.toBlob(value=>value?resolve(value):reject(new Error('이미지 저장에 실패했어요.')),'image/png'));
  return {blob,file:new File([blob],shareFileName(card),{type:'image/png'}),url:URL.createObjectURL(blob)};
 }

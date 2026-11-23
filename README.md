@@ -1,6 +1,6 @@
 # 모두의 창업: CEO로 살아남기
 
-창업자가 되어 한 달의 일정을 짜고, 사람을 만나며 회사를 운영하는 한국어 브라우저 게임입니다. (공개 주소 확정 전 · `site-config.js`의 `GAME_URL`과 `index.html`의 `GAME-URL-PLACEHOLDER`를 함께 바꿉니다)
+창업자가 되어 한 달의 일정을 짜고, 사람을 만나며 회사를 운영하는 한국어 브라우저 게임입니다. 공개 주소는 <https://www.letter4ceo.com/games/modoostartup>입니다(주소를 바꿀 때는 `site-config.js`의 `GAME_URL`, `index.html`의 canonical·og 주소, `assets/qr-game.png`를 함께 바꿉니다).
 
 ## 내 컴퓨터에서 실행하기
 
