@@ -2,7 +2,7 @@ import {GLOSSARY,searchGlossary,WIKI_SOURCES,WIKI_PATHS} from './glossary.js';
 import {wikiThumbPath} from './wiki-thumbs.js';
 import {statIcon} from './stat-view.js';
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const wikiThumb=(term,lazy=true)=>`<img class="wiki-thumb" src="${wikiThumbPath(term.id,term.category)}" alt="" width="640" height="400"${lazy?' loading="lazy"':''} decoding="async">`;
+const wikiThumb=(term,lazy=true)=>`<img class="wiki-thumb" src="${wikiThumbPath(term.id,term.category)}" alt="" width="960" height="600"${lazy?' loading="lazy"':''} decoding="async" onerror="this.onerror=null;this.src=this.src.replace('.webp','.svg')">`;
 export const WIKI_CATEGORIES=['자금','고객','제품','조직','기업·전략','투자','투자자·지원','투자계약'];
 const categoryIndex=category=>WIKI_CATEGORIES.indexOf(category);
 const termButton=id=>{const term=GLOSSARY.find(t=>t.id===id);return term?`<button class="wiki-term-chip" data-action="wiki-term" data-id="${term.id}">${esc(term.term)}</button>`:'';};
