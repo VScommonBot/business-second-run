@@ -2,6 +2,7 @@ import {statIcon} from './stat-view.js';
 import {endingMood,drawMoodAtmosphere} from './ending-mood.js';
 
 import {GAME_URL,GAME_QR,isPlaceholderUrl} from './site-config.js';
+import {formatMoney} from './money.js';
 export const SHARE_URL=GAME_URL;
 const W=1200,H=1500;
 let cachedKey='',cachedPromise;
@@ -36,7 +37,7 @@ export async function renderResultCard(card){
  fitText(ctx,`${card.name} 대표`,106,627,480,40,'#1e2c49',600);fitText(ctx,card.industry,108,673,480,28,'#526780');
  ctx.save();ctx.filter=mood.portraitFilter;const scale=Math.min(390/portrait.width,640/portrait.height);const pw=portrait.width*scale,ph=portrait.height*scale;ctx.drawImage(portrait,935-pw/2,790-ph,pw,ph);ctx.restore();
  fitText(ctx,`${card.place} · ${card.season}`,80,778,1020,28,'#1e2c49');
- const stats=[['runway','보낸 시간',`${card.months}개월`],['career','대표 레벨',`Lv. ${card.level}`],['team','고객',`${Math.round(card.customers).toLocaleString('ko-KR')}명`],['cash','회사 현금',`${Math.round(card.cash).toLocaleString('ko-KR')}만 원`]];
+ const stats=[['runway','보낸 시간',`${card.months}개월`],['career','대표 레벨',`Lv. ${card.level}`],['team','고객',`${Math.round(card.customers).toLocaleString('ko-KR')}명`],['cash','회사 현금',`${formatMoney(card.cash)}`]];
  stats.forEach(([icon,label,value],i)=>{const x=72+(i%2)*546,y=870+Math.floor(i/2)*204;rounded(ctx,x,y,510,176,22,'#fff');drawIcon(ctx,icon,x+28,y+29,mood.accent);fitText(ctx,label,x+80,y+58,400,27,'#58708e');fitText(ctx,value,x+30,y+126,450,43);});
  fitText(ctx,'모두의 창업: CEO로 살아남기',72,1372,860,32,'#2860ed',600);
  fitText(ctx,mood.caption,72,1418,860,26,mood.accent);

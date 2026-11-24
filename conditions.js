@@ -1,3 +1,4 @@
+import {formatMoney} from './money.js';
 import {GAUGES} from './background.js';
 const seatNames={family:'가족',friend:'친구',partner:'배우자',mentor:'멘토',investor:'투자자',customer:'고객',cofounder:'공동창업자',staff:'직원'};
 const flagNames={seeded:'시드 투자 유치',funded:'투자 유치',series_a:'시리즈 A',hired_first:'첫 채용',skipped_books:'미룬 회계 처리',equity_verbal:'구두 지분 약속',copycat:'경쟁사의 모방'};
@@ -11,17 +12,17 @@ export function checkRequirements(s,req={}){
   if(key==='seat'||key==='noSeat'){const has=!!s.seats?.[value];push(key==='seat'?has:!has,`${seatNames[value]||value} ${key==='seat'?'관계 필요':'관계가 없을 때'}`);continue;}
   const values={minTeam:[s.team??0,'직원','명'],minCash:[s.cash,'회사 현금','만 원'],minRev:[s.revenue,'월 매출','만 원'],maxRev:[s.revenue,'월 매출','만 원'],minCustomers:[s.customers,'고객','명'],maxHealth:[s.health,'체력',''],minHidden:[s.hiddenRisk??5,'누적 위험',''],maxEquity:[s.equity??100,'대표 지분','%'],minRunway:[runway(s),'런웨이','개월'],maxRunway:[runway(s),'런웨이','개월'],minTurn:[Math.max(0,s.month-1),'진행 기간','개월']};
   if(key==='customerSample'){const n=s.industry==='influencer'?4:30;push(s.customers>=n,`고객 ${n}명 이상 · 현재 ${s.customers}명`);continue;}
-  if(values[key]){const [current,label,unit]=values[key],isMax=key.startsWith('max');push(isMax?current<=value:current>=value,`${label} ${value}${unit} ${isMax?'이하':'이상'} · 현재 ${fmt(current)}${unit}`);}
+  if(values[key]){const [current,label,unit]=values[key],isMax=key.startsWith('max');const shown=unit==='만 원'?formatMoney:n=>`${fmt(n)}${unit}`;push(isMax?current<=value:current>=value,`${label} ${shown(value)} ${isMax?'이하':'이상'} · 현재 ${shown(current)}`);}
   else push(false,'추가 조건을 확인할 수 없는 선택');
  }
  return {ok:checks.every(x=>x.ok),checks,reasons:checks.filter(x=>!x.ok).map(x=>x.text)};
 }
 export function choiceAvailability(s,c){
  const status=checkRequirements(s,c.req);const add=(ok,text)=>status.checks.push({ok:!!ok,text});
- if(c.special==='inject')add((s.reserve??0)>0&&s.investmentLimit!=='strict'&&(s.investmentLimit!=='flex'||(s.invested??0)<(s.initialInvestment??0)*1.5),`개인 비상금과 투자 한계선 · 비상금 ${Math.round(s.reserve??0).toLocaleString()}만 원`);
+ if(c.special==='inject')add((s.reserve??0)>0&&s.investmentLimit!=='strict'&&(s.investmentLimit!=='flex'||(s.invested??0)<(s.initialInvestment??0)*1.5),`개인 비상금과 투자 한계선 · 비상금 ${formatMoney(s.reserve??0)}`);
  if(c.special==='family_loan')add((s.relations?.family??0)>-40,`가족 관계 −40 초과 · 현재 ${s.relations?.family??0}`);
- if(c.special==='guarantee_loan')add((s.guarantee??0)<30000,`개인 보증 30,000만 원 미만 · 현재 ${Math.round(s.guarantee??0).toLocaleString()}만 원`);
- if(Number(c.fx?.cash)<0)add(s.cash+c.fx.cash>=0,`선택 비용 ${Math.abs(c.fx.cash).toLocaleString()}만 원 · 현재 현금 ${Math.round(s.cash).toLocaleString()}만 원`);
+ if(c.special==='guarantee_loan')add((s.guarantee??0)<30000,`개인 보증 ${formatMoney(30000)} 미만 · 현재 ${formatMoney(s.guarantee??0)}`);
+ if(Number(c.fx?.cash)<0)add(s.cash+c.fx.cash>=0,`선택 비용 ${formatMoney(Math.abs(c.fx.cash))} · 현재 현금 ${formatMoney(s.cash)}`);
  status.ok=status.checks.every(x=>x.ok);status.reasons=status.checks.filter(x=>!x.ok).map(x=>x.text);return status;
 }
 export function growthStage(s,data){const tiers=data.industries[s.industry].stageRev||[0,1,400,1500,6000,20000];let result=0;for(let i=1;i<tiers.length;i++)if(s.revenue>=tiers[i])result=i;return result;}
