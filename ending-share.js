@@ -20,7 +20,7 @@ function drawIcon(ctx,key,x,y,color='#2860ed'){
 export function shareFileName(card){return `모두의창업-${card.name.replace(/[^\p{L}\p{N}_-]/gu,'').slice(0,12)||'대표'}-${card.keyword}.png`;}
 export async function renderResultCard(card){
  const mood=endingMood(card.ending);
- const [background,portrait,logo]=await Promise.all([loadImage(card.background),loadImage(card.standing||card.portrait),loadImage('assets/mv-logo-blue.webp')]);
+ const [background,portrait,logo]=await Promise.all([loadImage(card.background),loadImage(card.standing||card.portrait),loadImage('assets/modoo-startup-logo.png')]);
  const qr=isPlaceholderUrl(SHARE_URL)?null:await loadImage(GAME_QR).catch(()=>null);
  await document.fonts.ready;
  const canvas=document.createElement('canvas');canvas.width=W;canvas.height=H;
@@ -28,7 +28,7 @@ export async function renderResultCard(card){
  ctx.fillStyle=mood.base;ctx.fillRect(0,0,W,H);ctx.save();ctx.filter=mood.filter;cover(ctx,background,0,0,W,820);ctx.restore();
  drawMoodAtmosphere(ctx,mood,W,820);
  const veil=ctx.createLinearGradient(0,0,W,650);veil.addColorStop(0,`rgba(${mood.veil},.98)`);veil.addColorStop(.57,`rgba(${mood.veil},.82)`);veil.addColorStop(1,`rgba(${mood.veil},.08)`);ctx.fillStyle=veil;ctx.fillRect(0,0,W,820);
- ctx.drawImage(logo,72,62,64,64);fitText(ctx,'모두의 창업',155,107,850,38,'#2860ed',600);
+ ctx.drawImage(logo,72,70,256,50);
  fitText(ctx,'나의 창업 엔딩',80,227,760,30,'#567092');
  fitText(ctx,card.keyword,72,360,1020,112,mood.ink,650);
  fitText(ctx,`${card.months}개월의 기록`,80,432,700,36,'#435776');

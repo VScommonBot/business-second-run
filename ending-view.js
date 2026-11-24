@@ -15,7 +15,7 @@ export function resultCardPreview(card){
  const mood=endingMood(card.ending);
  return `<div class="result-postcard" data-mood="${esc(card.ending)}" data-atmosphere="${mood.effect}" style="${moodStyle(mood)}" aria-label="${esc(card.name)} 대표의 ${esc(card.keyword)} 결과 카드">
   <img class="postcard-background" src="${esc(card.background)}" alt="${esc(card.keyword)} 엔딩 일러스트">
-  <div class="postcard-shade"></div><div class="postcard-atmosphere" aria-hidden="true"></div><div class="postcard-brand"><img src="assets/mv-logo-blue.webp" alt="">모두의 창업</div>
+  <div class="postcard-shade"></div><div class="postcard-atmosphere" aria-hidden="true"></div><div class="postcard-brand"><img src="assets/modoo-startup-logo.svg" alt="모두의 창업" width="154" height="30"></div>
   <div class="postcard-title"><span>나의 창업 엔딩</span><strong>${esc(card.keyword)}</strong><p>${card.months}개월의 기록</p></div>
   <img class="postcard-portrait" src="${esc(card.standing||card.portrait)}" alt="${esc(card.name)} 대표 캐릭터">
   <div class="postcard-person"><strong>${esc(card.name)} 대표</strong><span>${esc(card.industry)}</span></div>

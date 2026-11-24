@@ -25,7 +25,7 @@ export function upcomingEvent(state){
 
 export function gameTopbar(c){
  const s=c.state,q=c.quests,month=Math.min(s.month,60),year=Math.floor((month-1)/12)+1;
- return `<header class="g-topbar"><button type="button" class="g-brand" data-action="intro" aria-label="모두의 창업 첫 화면으로"><img src="assets/mv-logo-blue.webp" alt="" width="38" height="38"><div><b>모두의 창업</b><small>CEO로 살아남기</small></div></button>
+ return `<header class="g-topbar"><button type="button" class="g-brand" data-action="intro" aria-label="모두의 창업 첫 화면으로"><span class="brand-mark brand-official"><img class="brand-logo" src="assets/modoo-startup-logo.svg" alt="" width="154" height="30"></span><div><b>모두의 창업</b><small>CEO로 살아남기</small></div></button>
  <div class="g-currencies" aria-label="재화">
  <div class="g-cur" title="보유 현금" data-fx-stat="cash"><span class="g-ico cash" aria-hidden="true">💰</span><span class="g-val g-num">${c.countNumber('cash',s.cash)}만 원</span><span class="g-lab">자금</span><button class="g-plus" data-action="financing" aria-label="자금 대책 보기">+</button></div>
  <div class="g-cur" title="평판(네트워크)" data-fx-stat="network"><span class="g-ico rep" aria-hidden="true">⭐</span><span class="g-val g-num">${num(s.skills.network)}</span><span class="g-lab">평판 · 쌓여 가는 연결</span></div>
