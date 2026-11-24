@@ -579,3 +579,18 @@ dialog:is(#modal){border:1px solid rgba(201,205,251,0.22)}
 :is(body[data-skin],#modal) .end-warning b{color:#f5968e}
 :is(body[data-skin],#modal) .event-choice.ends-game{border-color:rgba(201,205,251,0.22)}
 :is(body[data-skin],#modal) .evaluation-auto-note{color:#ffd085}
+
+:is(body[data-skin],#modal) .finance-metrics[role=tablist]>.quiet[aria-selected=true],:is(body[data-skin],#modal) .finance-metrics .active{background:#2a3a72;color:#dbe4ff;border-color:#8caef7}
+:is(body[data-skin],#modal) .revenue-chart-readout strong.money-negative{color:#e89b9f}
+:is(body[data-skin],#modal) .revenue-chart-readout strong.money-positive{color:#94efc9}
+:is(body[data-skin],#modal) .revenue-zero{stroke:rgba(201,205,251,0.45)}
+:is(body[data-skin],#modal) .revenue-axis-right,:is(body[data-skin],#modal) .revenue-axis-caption{fill:#e2c48a}
+:is(body[data-skin],#modal) .profit-line{stroke:#7ed0b0}
+:is(body[data-skin],#modal) .profit-plot .revenue-dot{stroke:#7ed0b0}
+:is(body[data-skin],#modal) .profit-plot .revenue-point.selected .revenue-dot,:is(body[data-skin],#modal) .profit-plot .revenue-point:hover .revenue-dot{fill:#7ed0b0;filter:drop-shadow(0 0 2px #7ed0b0)}
+:is(body[data-skin],#modal) .cashflow-bar.up{fill:#3ecf8e}
+:is(body[data-skin],#modal) .cashflow-bar.down{fill:#e89b9f}
+:is(body[data-skin],#modal) .cash-end-line{stroke:#e2c48a}
+:is(body[data-skin],#modal) .cash-end-dot{stroke:#e2c48a}
+:is(body[data-skin],#modal) .cashflow-plot .revenue-point.selected .cash-end-dot,:is(body[data-skin],#modal) .cashflow-plot .revenue-point:hover .cash-end-dot{fill:#e2c48a;filter:drop-shadow(0 0 2px #e2c48a)}
+:is(body[data-skin],#modal) .finance-chart-help{color:#bfc3f8}

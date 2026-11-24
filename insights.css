@@ -18,3 +18,28 @@
 @media(max-width:430px){.ad-examples{gap:9px}.ad-examples figcaption{font-size:12px;padding:10px}.ad-form-actions button{font-size:12px}.ad-recipient{padding:11px}.ad-recipient strong{font-size:13px}.ad-form-intro{font-size:14px}}
 
 #modal .music-toggle{display:flex;align-items:center;justify-content:space-between;gap:20px;margin:0}#modal .music-toggle input[type=checkbox]{width:20px;height:20px;min-height:0;margin:0;padding:0;flex:none}#modal .volume-label{display:flex;justify-content:space-between;margin:22px 0 0}#modal .music-settings input[type=range]{min-height:0;padding:0}
+
+.summary-grid-finance{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
+@media(min-width:1100px){.summary-grid-finance{grid-template-columns:repeat(5,1fr)}}
+@media(max-width:720px){.summary-grid-finance{grid-template-columns:1fr 1fr}}
+.finance-metrics{display:flex;gap:4px;overflow-x:auto;overscroll-behavior-x:contain;flex:none;scroll-snap-type:inline proximity;scrollbar-width:none;-ms-overflow-style:none}
+.finance-metrics::-webkit-scrollbar{display:none}
+.finance-metrics[role=tablist]>.quiet{flex:none;scroll-snap-align:start;min-height:36px}
+.finance-metrics[role=tablist]>.quiet[aria-selected=true],.finance-metrics .active{background:#eaf1ff;color:#275fc7;border-color:#82aaf0}
+.revenue-chart-readout strong.money-negative{color:#c33c42}
+.revenue-chart-readout strong.money-positive{color:#197b52}
+.finance-readout-sub{display:block;font-size:12px;color:#7085a2;margin-top:3px;font-weight:500}
+.revenue-zero{stroke:#9aabc4;stroke-dasharray:none;stroke-width:1.2}
+.revenue-axis-right{fill:#a06a24}
+.revenue-axis-caption{fill:#627895;font-size:11px;font-family:inherit}
+.profit-line{stroke:#2a8a6a}
+.profit-plot .revenue-dot{stroke:#2a8a6a}
+.profit-plot .revenue-point.selected .revenue-dot,.profit-plot .revenue-point:hover .revenue-dot{fill:#2a8a6a;filter:drop-shadow(0 0 2px #2a8a6a)}
+.cashflow-bar.up{fill:#3c9a6e}
+.cashflow-bar.down{fill:#c33c42}
+.cash-end-line{fill:none;stroke:#d0892a;stroke-width:3;stroke-linejoin:round;stroke-linecap:round}
+.cash-end-dot{stroke:#d0892a}
+.cashflow-plot .revenue-point.selected .cash-end-dot,.cashflow-plot .revenue-point:hover .cash-end-dot{fill:#d0892a;filter:drop-shadow(0 0 2px #d0892a)}
+.finance-chart-help{font-size:12px;line-height:1.7;color:#7085a2;margin:8px 0 0;max-width:72ch}
+.finance-chart-help .wiki-term-chip{display:inline-flex;margin:0 2px;padding:1px 7px;font-size:12px;min-height:28px;vertical-align:middle}
+@media(max-width:580px){.revenue-chart-readout{flex-wrap:wrap;gap:12px}.revenue-axis{font-size:12px}.finance-chart-help{max-width:none}}
