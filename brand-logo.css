@@ -1,0 +1,9 @@
+/* '모두의 창업' 공식 로고(정부 프로그램 워드마크)를 어두운 게임 화면에서도 원래 색 그대로 보이도록 흰 명판 위에 놓는 규칙 */
+.brand-mark.brand-official,.g-brand .brand-official{display:inline-grid;place-items:center;flex:none;width:auto;height:auto;aspect-ratio:auto;padding:6px 11px;background:#fff;border:2.5px solid #121647;border-radius:10px;box-shadow:inset 0 -2px 0 rgba(0,78,162,.12),0 3px 0 #121647;transform:none;overflow:visible}
+.brand-official .brand-logo{display:block;width:auto;height:22px;max-width:none;object-fit:contain}
+.brand.brand-home>div strong,.g-brand>div b{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.brand.brand-home>div span,.g-brand>div small{display:block;margin-top:0;font-size:11px}
+.postcard-brand img{width:auto;height:22px}
+@media(max-width:560px){.brand-official{padding:4px 8px}.brand-official .brand-logo{height:17px}.brand.brand-home>div span,.g-brand>div small{display:none}}
+.g-title .g-brand .brand-mark.brand-official{width:auto;height:auto;flex:none}
+.g-title .g-brand>div b,body[data-skin] .topbar .brand>div strong{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
