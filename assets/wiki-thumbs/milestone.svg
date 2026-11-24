@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400">
+<defs>
+<linearGradient id="bg-milestone" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#15122e"/>
+<stop offset=".55" stop-color="#1c1440"/>
+<stop offset="1" stop-color="#24103c"/>
+</linearGradient>
+<radialGradient id="blob-milestone" cx="28%" cy="22%" r="70%">
+<stop offset="0" stop-color="#6aa8ff" stop-opacity=".42"/>
+<stop offset="1" stop-color="#6aa8ff" stop-opacity="0"/>
+</radialGradient>
+<filter id="soft-milestone" x="-15%" y="-15%" width="130%" height="130%">
+<feDropShadow dx="0" dy="6" stdDeviation="4" flood-color="#0b0818" flood-opacity=".35"/>
+</filter>
+</defs>
+<rect width="640" height="400" fill="url(#bg-milestone)"/>
+<circle cx="130" cy="70" r="170" fill="url(#blob-milestone)"/>
+<circle cx="540" cy="330" r="150" fill="#6aa8ff" fill-opacity=".14"/>
+<circle cx="480" cy="70" r="8" fill="#5ee0ff" opacity=".55"/>
+<circle cx="90" cy="300" r="5" fill="#ffd166" opacity=".45"/>
+<circle cx="600" cy="140" r="6" fill="#ff6ad4" opacity=".4"/>
+<g filter="url(#soft-milestone)"><ellipse cx="320.0" cy="348.0" rx="230.0" ry="30.0" fill="#090616" opacity="0.35"/><path d="M120,300 Q250,250 320,220 Q420,180 540,160" fill="none" stroke="#4a508c" stroke-width="18" stroke-linejoin="round" stroke-linecap="round" opacity="1"/><circle cx="160.0" cy="290.0" r="10.0" fill="#f6f8ff" stroke="#1b1440" stroke-width="5"/><circle cx="240.0" cy="260.0" r="10.0" fill="#f6f8ff" stroke="#1b1440" stroke-width="5"/><circle cx="320.0" cy="230.0" r="10.0" fill="#ffd166" stroke="#1b1440" stroke-width="5"/><circle cx="400.0" cy="200.0" r="10.0" fill="#f6f8ff" stroke="#1b1440" stroke-width="5"/><circle cx="480.0" cy="170.0" r="10.0" fill="#f6f8ff" stroke="#1b1440" stroke-width="5"/><line x1="400.0" y1="210.0" x2="400.0" y2="130.0" stroke="#1b1440" stroke-width="8" stroke-linecap="round"/><polygon points="400.0,130.0 454.0,152.0 400.0,174.0" fill="#ff7aa2" stroke="#1b1440" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/><circle cx="400.0" cy="210.0" r="8.0" fill="#ffd166" stroke="#1b1440" stroke-width="5"/><ellipse cx="250.0" cy="305.2" rx="18.2" ry="5.6" fill="#000" opacity="0.18"/><path d="M234.6,299.6 Q250.0,274.4 265.4,299.6 Q250.0,309.4 234.6,299.6Z" fill="#5ee0ff" stroke="#1b1440" stroke-width="7" stroke-linejoin="round" stroke-linecap="round" opacity="1"/><circle cx="250.0" cy="253.4" r="15.4" fill="#ffd2b5" stroke="#1b1440" stroke-width="7"/><path d="M236.6,249.4 Q250.0,231.0 263.4,249.4 Q250.0,242.2 236.6,249.4Z" fill="#1b1440" stroke="#1b1440" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity="1"/><circle cx="245.1" cy="254.8" r="2.2" fill="#1b1440" stroke="#1b1440" stroke-width="0"/><circle cx="254.9" cy="254.8" r="2.2" fill="#1b1440" stroke="#1b1440" stroke-width="0"/><circle cx="255.6" cy="260.4" r="3.1" fill="#ff7aa2" stroke="none" stroke-width="0"/></g>
+</svg>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400">
+<defs>
+<linearGradient id="bg-multiple" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#15122e"/>
+<stop offset=".55" stop-color="#1c1440"/>
+<stop offset="1" stop-color="#24103c"/>
+</linearGradient>
+<radialGradient id="blob-multiple" cx="28%" cy="22%" r="70%">
+<stop offset="0" stop-color="#8b7cff" stop-opacity=".42"/>
+<stop offset="1" stop-color="#8b7cff" stop-opacity="0"/>
+</radialGradient>
+<filter id="soft-multiple" x="-15%" y="-15%" width="130%" height="130%">
+<feDropShadow dx="0" dy="6" stdDeviation="4" flood-color="#0b0818" flood-opacity=".35"/>
+</filter>
+</defs>
+<rect width="640" height="400" fill="url(#bg-multiple)"/>
+<circle cx="130" cy="70" r="170" fill="url(#blob-multiple)"/>
+<circle cx="540" cy="330" r="150" fill="#8b7cff" fill-opacity=".14"/>
+<circle cx="480" cy="70" r="8" fill="#5ee0ff" opacity=".55"/>
+<circle cx="90" cy="300" r="5" fill="#ffd166" opacity=".45"/>
+<circle cx="600" cy="140" r="6" fill="#ff6ad4" opacity=".4"/>
+<g filter="url(#soft-multiple)"><ellipse cx="320.0" cy="348.0" rx="230.0" ry="30.0" fill="#090616" opacity="0.35"/><circle cx="200.0" cy="230.0" r="40.0" fill="#ffd166" stroke="#1b1440" stroke-width="7"/><circle cx="200.0" cy="230.0" r="24.8" fill="none" stroke="#1b1440" stroke-width="4"/><ellipse cx="188.8" cy="218.0" rx="11.2" ry="6.0" fill="#f6f8ff" opacity="0.5"/><path d="M260,230 H340" fill="none" stroke="#5ee0ff" stroke-width="10" stroke-linejoin="round" stroke-linecap="round" opacity="1"/><polygon points="340.0,216.0 368.0,230.0 340.0,244.0" fill="#5ee0ff" stroke="#1b1440" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/><ellipse cx="460.0" cy="220.0" rx="28.0" ry="11.8" fill="#ffd166" opacity="1" stroke="#1b1440" stroke-width="6"/><ellipse cx="460.0" cy="228.0" rx="28.0" ry="11.8" fill="#ffd166" opacity="1" stroke="#1b1440" stroke-width="6"/><ellipse cx="460.0" cy="236.0" rx="28.0" ry="11.8" fill="#ffd166" opacity="1" stroke="#1b1440" stroke-width="6"/><ellipse cx="460.0" cy="244.0" rx="28.0" ry="11.8" fill="#ffd166" opacity="1" stroke="#1b1440" stroke-width="6"/><ellipse cx="460.0" cy="252.0" rx="28.0" ry="11.8" fill="#ffd166" opacity="1" stroke="#1b1440" stroke-width="6"/><ellipse cx="460.0" cy="260.0" rx="28.0" ry="11.8" fill="#ffd166" opacity="1" stroke="#1b1440" stroke-width="6"/><ellipse cx="453.0" cy="217.8" rx="8.4" ry="2.8" fill="#f6f8ff" opacity="0.45"/></g>
+</svg>

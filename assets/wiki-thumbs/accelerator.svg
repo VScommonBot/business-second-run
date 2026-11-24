@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400">
+<defs>
+<linearGradient id="bg-accelerator" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#15122e"/>
+<stop offset=".55" stop-color="#1c1440"/>
+<stop offset="1" stop-color="#24103c"/>
+</linearGradient>
+<radialGradient id="blob-accelerator" cx="28%" cy="22%" r="70%">
+<stop offset="0" stop-color="#2dd4bf" stop-opacity=".42"/>
+<stop offset="1" stop-color="#2dd4bf" stop-opacity="0"/>
+</radialGradient>
+<filter id="soft-accelerator" x="-15%" y="-15%" width="130%" height="130%">
+<feDropShadow dx="0" dy="6" stdDeviation="4" flood-color="#0b0818" flood-opacity=".35"/>
+</filter>
+</defs>
+<rect width="640" height="400" fill="url(#bg-accelerator)"/>
+<circle cx="130" cy="70" r="170" fill="url(#blob-accelerator)"/>
+<circle cx="540" cy="330" r="150" fill="#2dd4bf" fill-opacity=".14"/>
+<circle cx="480" cy="70" r="8" fill="#5ee0ff" opacity=".55"/>
+<circle cx="90" cy="300" r="5" fill="#ffd166" opacity=".45"/>
+<circle cx="600" cy="140" r="6" fill="#ff6ad4" opacity=".4"/>
+<g filter="url(#soft-accelerator)"><ellipse cx="320.0" cy="348.0" rx="230.0" ry="30.0" fill="#090616" opacity="0.35"/><path d="M320.0,106.0 Q353.6,166.0 348.8,226.0 H291.2 Q286.4,166.0 320.0,106.0Z" fill="#ff8a3d" stroke="#1b1440" stroke-width="8" stroke-linejoin="round" stroke-linecap="round" opacity="1"/><circle cx="320.0" cy="178.0" r="14.4" fill="#f6f8ff" stroke="#1b1440" stroke-width="6"/><polygon points="291.2,209.2 262.4,240.4 298.4,226.0" fill="#ff5d6c" stroke="#1b1440" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/><polygon points="348.8,209.2 377.6,240.4 341.6,226.0" fill="#ff5d6c" stroke="#1b1440" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/><path d="M320.0,275.9 C296.5,259.1 306.6,235.6 320.0,222.2 C326.7,242.3 341.8,250.7 320.0,275.9Z" fill="#ff8a3d" stroke="#1b1440" stroke-width="7" stroke-linejoin="round" stroke-linecap="round" opacity="1"/><path d="M320.0,265.8 C309.9,255.8 316.6,245.7 320.0,239.0 C323.4,250.7 328.4,254.1 320.0,265.8Z" fill="#ffd166" stroke="#1b1440" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" opacity="1"/><circle cx="200.0" cy="280.0" r="10.0" fill="#ffd166" stroke="none" stroke-width="0"/><circle cx="440.0" cy="300.0" r="8.0" fill="#5ee0ff" stroke="none" stroke-width="0"/></g>
+</svg>

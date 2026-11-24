@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400">
+<defs>
+<linearGradient id="bg-pivot" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#15122e"/>
+<stop offset=".55" stop-color="#1c1440"/>
+<stop offset="1" stop-color="#24103c"/>
+</linearGradient>
+<radialGradient id="blob-pivot" cx="28%" cy="22%" r="70%">
+<stop offset="0" stop-color="#b89bff" stop-opacity=".42"/>
+<stop offset="1" stop-color="#b89bff" stop-opacity="0"/>
+</radialGradient>
+<filter id="soft-pivot" x="-15%" y="-15%" width="130%" height="130%">
+<feDropShadow dx="0" dy="6" stdDeviation="4" flood-color="#0b0818" flood-opacity=".35"/>
+</filter>
+</defs>
+<rect width="640" height="400" fill="url(#bg-pivot)"/>
+<circle cx="130" cy="70" r="170" fill="url(#blob-pivot)"/>
+<circle cx="540" cy="330" r="150" fill="#b89bff" fill-opacity=".14"/>
+<circle cx="480" cy="70" r="8" fill="#5ee0ff" opacity=".55"/>
+<circle cx="90" cy="300" r="5" fill="#ffd166" opacity=".45"/>
+<circle cx="600" cy="140" r="6" fill="#ff6ad4" opacity=".4"/>
+<g filter="url(#soft-pivot)"><ellipse cx="320.0" cy="348.0" rx="230.0" ry="30.0" fill="#090616" opacity="0.35"/><path d="M280.0,250.0 H340.0 Q380.0,250.0 380.0,210.0 V180.0" fill="none" stroke="#5ee0ff" stroke-width="14" stroke-linejoin="round" stroke-linecap="round" opacity="1"/><polygon points="380.0,162.0 362.0,188.0 398.0,188.0" fill="#5ee0ff" stroke="#1b1440" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/><circle cx="240.0" cy="250.0" r="18.0" fill="#ff8a3d" stroke="#1b1440" stroke-width="7"/><path d="M470.0,198.5 Q482.6,221.0 480.8,243.5 H459.2 Q457.4,221.0 470.0,198.5Z" fill="#c6f56b" stroke="#1b1440" stroke-width="8" stroke-linejoin="round" stroke-linecap="round" opacity="1"/><circle cx="470.0" cy="225.5" r="5.4" fill="#f6f8ff" stroke="#1b1440" stroke-width="6"/><polygon points="459.2,237.2 448.4,248.9 461.9,243.5" fill="#ff5d6c" stroke="#1b1440" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/><polygon points="480.8,237.2 491.6,248.9 478.1,243.5" fill="#ff5d6c" stroke="#1b1440" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/><path d="M470.0,262.2 C461.2,255.9 465.0,247.1 470.0,242.1 C472.5,249.6 478.2,252.8 470.0,262.2Z" fill="#ff8a3d" stroke="#1b1440" stroke-width="7" stroke-linejoin="round" stroke-linecap="round" opacity="1"/><path d="M470.0,258.4 C466.2,254.7 468.7,250.9 470.0,248.4 C471.3,252.8 473.1,254.0 470.0,258.4Z" fill="#ffd166" stroke="#1b1440" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" opacity="1"/></g>
+</svg>

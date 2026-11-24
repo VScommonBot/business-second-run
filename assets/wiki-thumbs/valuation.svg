@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400">
+<defs>
+<linearGradient id="bg-valuation" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#15122e"/>
+<stop offset=".55" stop-color="#1c1440"/>
+<stop offset="1" stop-color="#24103c"/>
+</linearGradient>
+<radialGradient id="blob-valuation" cx="28%" cy="22%" r="70%">
+<stop offset="0" stop-color="#8b7cff" stop-opacity=".42"/>
+<stop offset="1" stop-color="#8b7cff" stop-opacity="0"/>
+</radialGradient>
+<filter id="soft-valuation" x="-15%" y="-15%" width="130%" height="130%">
+<feDropShadow dx="0" dy="6" stdDeviation="4" flood-color="#0b0818" flood-opacity=".35"/>
+</filter>
+</defs>
+<rect width="640" height="400" fill="url(#bg-valuation)"/>
+<circle cx="130" cy="70" r="170" fill="url(#blob-valuation)"/>
+<circle cx="540" cy="330" r="150" fill="#8b7cff" fill-opacity=".14"/>
+<circle cx="480" cy="70" r="8" fill="#5ee0ff" opacity=".55"/>
+<circle cx="90" cy="300" r="5" fill="#ffd166" opacity=".45"/>
+<circle cx="600" cy="140" r="6" fill="#ff6ad4" opacity=".4"/>
+<g filter="url(#soft-valuation)"><ellipse cx="320.0" cy="348.0" rx="230.0" ry="30.0" fill="#090616" opacity="0.35"/><rect x="125.0" y="210.0" width="70.0" height="110.0" rx="10" fill="#353a78" stroke="#1b1440" stroke-width="8" stroke-linejoin="round"/><rect x="141.0" y="228.0" width="14.0" height="12.7" rx="4" fill="#5ee0ff" stroke="#1b1440" stroke-width="3.5" stroke-linejoin="round"/><rect x="165.0" y="228.0" width="14.0" height="12.7" rx="4" fill="#ffd166" stroke="#1b1440" stroke-width="3.5" stroke-linejoin="round"/><rect x="141.0" y="250.7" width="14.0" height="12.7" rx="4" fill="#ffd166" stroke="#1b1440" stroke-width="3.5" stroke-linejoin="round"/><rect x="165.0" y="250.7" width="14.0" height="12.7" rx="4" fill="#5ee0ff" stroke="#1b1440" stroke-width="3.5" stroke-linejoin="round"/><rect x="141.0" y="273.3" width="14.0" height="12.7" rx="4" fill="#5ee0ff" stroke="#1b1440" stroke-width="3.5" stroke-linejoin="round"/><rect x="165.0" y="273.3" width="14.0" height="12.7" rx="4" fill="#ffd166" stroke="#1b1440" stroke-width="3.5" stroke-linejoin="round"/><rect x="148.0" y="298.0" width="24.0" height="22.0" rx="4" fill="#2a1d4a" stroke="#1b1440" stroke-width="5" stroke-linejoin="round"/><polygon points="320.0,110.0 400.0,170.0 320.0,300.0 240.0,170.0" fill="#5ee0ff" stroke="#1b1440" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/><polygon points="320.0,110.0 360.0,170.0 320.0,170.0" fill="#f6f8ff" stroke="#1b1440" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/><rect x="180.0" y="200.0" width="280.0" height="22.0" rx="6" fill="#ffd166" stroke="#1b1440" stroke-width="5" stroke-linejoin="round"/></g>
+</svg>

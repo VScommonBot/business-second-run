@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400">
+<defs>
+<linearGradient id="bg-ordinary" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#15122e"/>
+<stop offset=".55" stop-color="#1c1440"/>
+<stop offset="1" stop-color="#24103c"/>
+</linearGradient>
+<radialGradient id="blob-ordinary" cx="28%" cy="22%" r="70%">
+<stop offset="0" stop-color="#e0b07a" stop-opacity=".42"/>
+<stop offset="1" stop-color="#e0b07a" stop-opacity="0"/>
+</radialGradient>
+<filter id="soft-ordinary" x="-15%" y="-15%" width="130%" height="130%">
+<feDropShadow dx="0" dy="6" stdDeviation="4" flood-color="#0b0818" flood-opacity=".35"/>
+</filter>
+</defs>
+<rect width="640" height="400" fill="url(#bg-ordinary)"/>
+<circle cx="130" cy="70" r="170" fill="url(#blob-ordinary)"/>
+<circle cx="540" cy="330" r="150" fill="#e0b07a" fill-opacity=".14"/>
+<circle cx="480" cy="70" r="8" fill="#5ee0ff" opacity=".55"/>
+<circle cx="90" cy="300" r="5" fill="#ffd166" opacity=".45"/>
+<circle cx="600" cy="140" r="6" fill="#ff6ad4" opacity=".4"/>
+<g filter="url(#soft-ordinary)"><ellipse cx="320.0" cy="348.0" rx="230.0" ry="30.0" fill="#090616" opacity="0.35"/><rect x="180.0" y="120.0" width="280.0" height="180.0" rx="16" fill="#ffe8c7" stroke="#1b1440" stroke-width="8" stroke-linejoin="round"/><circle cx="400.0" cy="250.0" r="28.0" fill="#6aa8ff" stroke="#1b1440" stroke-width="7"/><circle cx="400.0" cy="250.0" r="14.0" fill="#ffd166" stroke="#1b1440" stroke-width="5"/><polygon points="400.0,270.0 384.0,310.0 400.0,296.0 416.0,310.0" fill="#ff5d6c" stroke="#1b1440" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/><path d="M210,170 H400" fill="none" stroke="#b89bff" stroke-width="8" stroke-linejoin="round" stroke-linecap="round" opacity="1"/><path d="M210,200 H360" fill="none" stroke="#b89bff" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" opacity="1"/></g>
+</svg>

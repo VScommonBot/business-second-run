@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400">
+<defs>
+<linearGradient id="bg-catsupporters" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#15122e"/>
+<stop offset=".55" stop-color="#1c1440"/>
+<stop offset="1" stop-color="#24103c"/>
+</linearGradient>
+<radialGradient id="blob-catsupporters" cx="28%" cy="22%" r="70%">
+<stop offset="0" stop-color="#2dd4bf" stop-opacity=".42"/>
+<stop offset="1" stop-color="#2dd4bf" stop-opacity="0"/>
+</radialGradient>
+<filter id="soft-catsupporters" x="-15%" y="-15%" width="130%" height="130%">
+<feDropShadow dx="0" dy="6" stdDeviation="4" flood-color="#0b0818" flood-opacity=".35"/>
+</filter>
+</defs>
+<rect width="640" height="400" fill="url(#bg-catsupporters)"/>
+<circle cx="130" cy="70" r="170" fill="url(#blob-catsupporters)"/>
+<circle cx="540" cy="330" r="150" fill="#2dd4bf" fill-opacity=".14"/>
+<circle cx="480" cy="70" r="8" fill="#5ee0ff" opacity=".55"/>
+<circle cx="90" cy="300" r="5" fill="#ffd166" opacity=".45"/>
+<circle cx="600" cy="140" r="6" fill="#ff6ad4" opacity=".4"/>
+<g filter="url(#soft-catsupporters)"><ellipse cx="320.0" cy="348.0" rx="230.0" ry="30.0" fill="#090616" opacity="0.35"/><ellipse cx="240.0" cy="266.0" rx="26.0" ry="8.0" fill="#000" opacity="0.18"/><path d="M218.0,258.0 Q240.0,222.0 262.0,258.0 Q240.0,272.0 218.0,258.0Z" fill="#2dd4bf" stroke="#1b1440" stroke-width="7" stroke-linejoin="round" stroke-linecap="round" opacity="1"/><circle cx="240.0" cy="192.0" r="22.0" fill="#ffd2b5" stroke="#1b1440" stroke-width="7"/><path d="M220.0,188.0 Q240.0,160.0 260.0,188.0 Q240.0,176.0 220.0,188.0Z" fill="#1b1440" stroke="#1b1440" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity="1"/><circle cx="233.0" cy="194.0" r="3.2" fill="#1b1440" stroke="#1b1440" stroke-width="0"/><circle cx="247.0" cy="194.0" r="3.2" fill="#1b1440" stroke="#1b1440" stroke-width="0"/><circle cx="248.0" cy="202.0" r="4.5" fill="#ff7aa2" stroke="none" stroke-width="0"/><path d="M290.0,270.0 L340.0,242.0 L366.0,260.0 L352.0,278.0 L310.0,286.0 Z" fill="#ffd2b5" stroke="#1b1440" stroke-width="7" stroke-linejoin="round" stroke-linecap="round" opacity="1"/><path d="M430.0,266.0 L376.0,240.0 L356.0,258.0 L374.0,276.0 L412.0,284.0 Z" fill="#f0bc98" stroke="#1b1440" stroke-width="7" stroke-linejoin="round" stroke-linecap="round" opacity="1"/><rect x="274.0" y="266.0" width="28.0" height="40.0" rx="10" fill="#6aa8ff" stroke="#1b1440" stroke-width="6" stroke-linejoin="round"/><rect x="418.0" y="264.0" width="28.0" height="40.0" rx="10" fill="#8b7cff" stroke="#1b1440" stroke-width="6" stroke-linejoin="round"/><circle cx="480.0" cy="230.0" r="24.0" fill="#ffd166" stroke="#1b1440" stroke-width="7"/><circle cx="480.0" cy="230.0" r="14.9" fill="none" stroke="#1b1440" stroke-width="4"/><ellipse cx="473.3" cy="222.8" rx="6.7" ry="3.6" fill="#f6f8ff" opacity="0.5"/></g>
+</svg>

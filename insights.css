@@ -43,3 +43,12 @@
 .finance-chart-help{font-size:12px;line-height:1.7;color:#7085a2;margin:8px 0 0;max-width:72ch}
 .finance-chart-help .wiki-term-chip{display:inline-flex;margin:0 2px;padding:1px 7px;font-size:12px;min-height:28px;vertical-align:middle}
 @media(max-width:580px){.revenue-chart-readout{flex-wrap:wrap;gap:12px}.revenue-axis{font-size:12px}.finance-chart-help{max-width:none}}
+/* 위키 카드·상세 상단의 카툰 썸네일. 카드 버튼의 초점 테두리가 잘리지 않도록 overflow는 열어둡니다. */
+.wiki-card.card{padding:0 0 20px;align-items:stretch;min-inline-size:0}
+.wiki-card>img,.wiki-detail>img{display:block;width:100%;max-inline-size:100%;block-size:auto;aspect-ratio:8/5;object-fit:cover}
+.wiki-card>img{border-start-start-radius:15px;border-start-end-radius:15px}
+.wiki-card>h2,.wiki-card>p,.wiki-card>.wiki-card-detail{padding-inline:22px;box-sizing:border-box;min-inline-size:0;overflow-wrap:break-word;align-self:stretch}
+.wiki-card>.wiki-category-tag{margin-block-start:14px;margin-inline:22px;align-self:flex-start}
+.wiki-detail>img{border-radius:14px;margin-block-end:16px}
+@media(max-width:700px){.wiki-card>h2,.wiki-card>p,.wiki-card>.wiki-card-detail{padding-inline:18px}.wiki-card>.wiki-category-tag{margin-inline:18px}}
+@media(max-width:430px){.wiki-card>h2,.wiki-card>p,.wiki-card>.wiki-card-detail{padding-inline:16px}.wiki-card>.wiki-category-tag{margin-inline:16px}}
