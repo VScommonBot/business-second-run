@@ -113,7 +113,7 @@ dialog.month-play::backdrop{background:rgba(10,12,48,.72);overflow:hidden;oversc
 @keyframes mp-rest{0%,100%{transform:translateY(0)}50%{transform:translateY(1.5%)}}
 @keyframes mp-prop{0%{transform:translateY(8px) scale(.8);opacity:0}30%{opacity:1}100%{transform:translateY(-22px) scale(1.1);opacity:0}}
 @keyframes mp-gain{from{transform:translateY(8px);opacity:0}to{transform:none;opacity:1}}
-@media (max-width:760px){.month-play-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.mp-panel{aspect-ratio:4/5}dialog.month-play{padding:12px}.mp-caption b{font-size:13px}}
+@media (max-width:760px),(orientation:landscape) and (max-height:500px){.month-play-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.mp-panel{aspect-ratio:4/5}dialog.month-play{padding:12px}.mp-caption b{font-size:13px}}
 .motion-toggle[aria-pressed]{white-space:nowrap}
 /* 이야기·정산 창 속 표정 리그 배치 */
 .vn-character .face-rig{height:100%;width:auto;margin:0 auto}

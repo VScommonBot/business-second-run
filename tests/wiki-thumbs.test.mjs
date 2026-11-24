@@ -1,12 +1,12 @@
 // 위키 용어 썸네일 경로·자산·화면 표시 규칙을 검사합니다.
 import assert from 'node:assert/strict';
-import {readdirSync,readFileSync} from 'node:fs';
+import {readdirSync,readFileSync,statSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import {join} from 'node:path';
 import test from 'node:test';
 import {GLOSSARY} from '../glossary.js';
 import {WIKI_CATEGORIES,wikiCards,termDetail} from '../wiki-view.js';
-import {wikiThumbPath,wikiThumbFallbackPath,WIKI_THUMB_CATEGORY} from '../wiki-thumbs.js';
+import {wikiThumbPath,wikiThumbSmallPath,wikiThumbFallbackPath,WIKI_THUMB_CATEGORY} from '../wiki-thumbs.js';
 
 const root=fileURLToPath(new URL('..',import.meta.url));
 const thumbDir=join(root,'assets/wiki-thumbs');
@@ -46,18 +46,19 @@ test('대체용 SVG에 글자가 없다',()=>{
  }
 });
 
-test('목록 카드는 지연 로딩 webp 썸네일을 맨 앞에 둔다',()=>{
+test('목록 카드는 지연 로딩되는 작은(480px) webp 썸네일을 맨 앞에 둔다',()=>{
  const html=wikiCards('','all');
  assert.equal((html.match(/class="card wiki-card"/g)||[]).length,67);
  assert.match(html,/<button class="card wiki-card"[^>]*>\s*<img class="wiki-thumb"/);
  const runway=html.split('data-id="runway"')[1].split('</button>')[0];
- assert.match(runway,/src="assets\/wiki-thumbs\/runway\.webp"/);
+ assert.match(runway,/src="assets\/wiki-thumbs\/sm\/runway\.webp"/);
+ assert.match(runway,/srcset="assets\/wiki-thumbs\/sm\/runway\.webp 480w, assets\/wiki-thumbs\/runway\.webp 960w"/);
  assert.match(runway,/alt=""/);
  assert.match(runway,/loading="lazy"/);
  assert.match(runway,/decoding="async"/);
  assert.match(runway,/width="960"/);
  assert.match(runway,/height="600"/);
- assert.match(runway,/onerror="this.onerror=null;this.src=this.src.replace\('\.webp','.svg'\)"/);
+ assert.match(runway,/onerror="this.onerror=null;this.removeAttribute\('srcset'\);this.src='assets\/wiki-thumbs\/runway\.svg'"/);
 });
 
 test('상세 보기 썸네일은 바로 보이게 둔다',()=>{
@@ -67,4 +68,15 @@ test('상세 보기 썸네일은 바로 보이게 둔다',()=>{
  assert.match(detail.body,/alt=""/);
  assert.equal(detail.body.includes('loading="lazy"'),false);
  assert.match(detail.body,/decoding="async"/);
+});
+
+test('목록용 작은 썸네일이 모든 webp 원본마다 있고 원본보다 작다',()=>{
+ const smDir=join(thumbDir,'sm');
+ const small=new Set(readdirSync(smDir));
+ for(const name of readdirSync(thumbDir).filter(n=>n.endsWith('.webp'))){
+  assert.ok(small.has(name),`missing sm/${name}`);
+  assert.ok(statSync(join(smDir,name)).size<statSync(join(thumbDir,name)).size,`sm/${name} is not smaller`);
+ }
+ assert.equal(wikiThumbSmallPath('runway','자금'),'assets/wiki-thumbs/sm/runway.webp');
+ assert.equal(wikiThumbSmallPath('brand-new-term','투자'),'assets/wiki-thumbs/sm/cat-invest.webp');
 });

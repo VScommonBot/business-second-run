@@ -1,0 +1,56 @@
+/* v30 모바일 버튼 정리: 작은 화면에서 버튼 글자가 한 글자씩 줄바꿈되거나 겹치지 않게 합니다(가장 마지막에 읽습니다) */
+/* 버튼 라벨은 줄바꿈하지 않습니다 */
+.modal-head-actions button,.modal-auto-controls button,.modal-auto-controls .auto-speed,.g-m-foot .g-btn3d,.g-m-foot .g-pts,.g-hcard .g-act .g-btn3d,.g-hub .g-tab,.g-hub-foot .g-cta{white-space:nowrap}
+.modal-head h2{min-width:0;overflow-wrap:anywhere;word-break:keep-all}
+/* 모달 머리: 작은 화면에서는 제목과 닫기를 첫 줄에, '움직임 멈추기'·'오토모드' 같은 동작 버튼은 둘째 줄로 보냅니다 */
+@media (max-width:600px){
+ #modal .modal-head:has(.modal-motion,.modal-auto-controls){flex-wrap:wrap;row-gap:10px;column-gap:10px;align-items:flex-start}
+ #modal .modal-head:has(.modal-motion,.modal-auto-controls) h2{flex:1 1 calc(100% - 64px);order:0}
+ #modal .modal-head:has(.modal-motion,.modal-auto-controls) .modal-head-actions{display:contents}
+ #modal .modal-head:has(.modal-motion,.modal-auto-controls) .close-modal{order:1;margin-left:auto}
+ #modal .modal-head:has(.modal-motion,.modal-auto-controls) .modal-motion{order:2}
+ #modal .modal-head:has(.modal-motion,.modal-auto-controls) .modal-auto-controls{order:3}
+ #modal .modal-head-actions>.quiet,#modal .modal-auto-controls .quiet{font-size:13px;padding:0 14px;min-height:40px}
+ #modal .modal-auto-controls{gap:8px}
+}
+/* 닫기 버튼 터치 영역 44px */
+@media (pointer:coarse),(max-width:600px){
+ #modal .close-modal,.modal-head-actions .close-modal{width:44px;height:44px;flex:0 0 44px}
+}
+/* 할 일 고르기 카드: 좁은 화면(400px 이하)에서는 그림을 위로, 설명과 '배치' 버튼을 아래로 쌓습니다 */
+@media (max-width:400px){
+ .g-hcard{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto auto}
+ .g-hcard .g-pic{grid-column:1;grid-row:2;border-right:0;border-bottom:3px solid var(--ink);min-height:96px;height:96px}
+ .g-hcard .g-info{grid-column:1;grid-row:3}
+ .g-hcard .g-badges,.g-hcard .g-xprow{flex-wrap:wrap;row-gap:4px}
+ .g-hcard .g-act{flex-wrap:wrap;row-gap:6px}
+ .g-hcard .g-act .g-btn3d{height:44px;padding:0 18px}
+ .g-m-foot{gap:8px}
+ .g-m-foot .g-pts{padding:4px 10px 4px 4px;font-size:14px;flex:none}
+ .g-m-foot .g-btn3d{padding:0 14px;font-size:14px;min-width:0}
+}
+/* 엔딩의 달력 타일은 원래 여러 줄 구성입니다(검사 예외 표시) */
+.month-calendar{contain:layout}
+/* 터치 영역: 모양은 그대로 두고, 작은 아이콘 버튼은 투명한 ::before로 누르는 영역을 44px 이상으로 넓힙니다 */
+@media (pointer:coarse),(max-width:600px){
+ :is(.g-icon-btn,.game-session-button,.g-plus,.wiki-term-chip,.g-qchip,.g-cur,.g-brand,.brand-home,.g-btn3d.dark,.g-btn3d.blue,.modal-head-actions>.quiet,.modal-auto-controls .quiet,[data-action=chart-metric],[data-action=chart-unit],[data-action=history-year],[data-action=history-latest],[data-action=wiki-category],[data-action=office-pick],[data-action=person].quiet,[data-action=meet-person].quiet,[data-action=calendar-year].quiet,[data-action=rankings].quiet,[data-action=save].quiet,[data-action=slots].quiet,.event-choice,.g-tab){position:relative}
+ :is(.g-icon-btn,.g-swap,.g-plus,.game-session-button,.g-qchip,.g-cur,.g-brand,.brand-home,.g-btn3d.dark,.g-btn3d.blue,.modal-head-actions>.quiet,.modal-auto-controls .quiet,[data-action=chart-metric],[data-action=chart-unit],[data-action=history-year],[data-action=history-latest],[data-action=wiki-category],[data-action=office-pick],[data-action=person].quiet,[data-action=meet-person].quiet,[data-action=calendar-year].quiet,[data-action=rankings].quiet,[data-action=save].quiet,[data-action=slots].quiet,.event-choice,.g-tab)::before{content:"";position:absolute;left:50%;top:50%;width:max(100%,44px);height:max(100%,44px);translate:-50% -50%;background:transparent;pointer-events:auto}
+ .wiki-term-chip{min-height:36px}
+ .wiki-term-chip::before{content:"";position:absolute;left:50%;top:50%;width:max(100%,44px);height:44px;translate:-50% -50%}
+}
+/* 가로 모드 휴대폰(세로 500px 이하): 위 상태줄과 아래 업무 시작 패널을 고정하지 않아, 사건 '이어서 보기'·조언자 같은 버튼이 가려지지 않게 합니다 */
+@media (orientation:landscape) and (max-height:500px){
+ .g-topbar,body[data-skin] .topbar{position:static}
+ .g-start{position:static;margin:12px 12px 0;border-radius:18px;border-bottom:3px solid var(--ink)}
+ .gx-home{padding-bottom:76px}
+ .g-tabbar{height:54px}
+ .g-hub{padding-bottom:var(--gap)}
+ .g-hub-foot{position:static}
+ dialog.g-picker .g-modal{height:96dvh}
+}
+/* 일반 보조 버튼(.quiet·.primary)과 접기 제목(summary)도 누르는 영역만 44px로 넓힙니다 */
+@media (pointer:coarse),(max-width:600px){
+ :is(button.quiet,button.primary,details>summary,.g-hcard .g-btn3d,.g-close-hub,.month-play-skip){position:relative}
+ .g-ap-close{min-width:36px;min-height:36px}
+ :is(button.quiet,button.primary,details>summary,.g-hcard .g-btn3d,.g-close-hub,.month-play-skip,.g-ap-close)::before{content:"";position:absolute;left:50%;top:50%;width:max(100%,44px);height:max(100%,44px);translate:-50% -50%;background:transparent}
+}
