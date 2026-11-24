@@ -5,6 +5,7 @@ import {PLAN_STEPS,planAnswerLabel,planAnswerValues,planEffects} from './startup
 import {sceneAsset,seasonForMonth,SEASONS} from './scenery.js';
 import {getLocation} from './locations.js';
 import {relationshipLabel} from './story-engine.js';
+import {formatMoney,formatMoneySigned} from './money.js';
 
 export const ENDINGS={
  growth:{keyword:'성장',title:'수익을 내는 회사로 성장했어요',body:'60개월의 선택 끝에 흑자와 운영 자금을 남겼어요. 이제 회사가 성장한 만큼 나의 삶도 함께 돌아볼 시간이에요.',tone:'green'},
@@ -21,8 +22,8 @@ const finite=value=>typeof value==='number'&&Number.isFinite(value);
 const amount=value=>Math.round(value).toLocaleString('ko-KR');
 const sum=(rows,key)=>rows.reduce((total,row)=>total+(finite(row[key])?row[key]:0),0);
 const hasOriginalPlan=s=>!s.legacyConditions&&!!s.initialPlan&&!s.initialPlan.unrecorded&&((s.journal||[]).some(row=>row.type==='plan')||Object.keys(s.initialPlan.answers||{}).length>0);
-export const money=value=>finite(value)?`${amount(value)}만 원`:'기록 없음';
-export const signedMoney=value=>finite(value)?`${value>0?'+':''}${money(value)}`:'계산할 기록 없음';
+export const money=value=>finite(value)?formatMoney(value):'기록 없음';
+export const signedMoney=value=>finite(value)?formatMoneySigned(value):'계산할 기록 없음';
 
 // This is a cash-settlement scenario, never an assertion of a real sale or payout.
 // Family borrowing and guarantees are already contained in corporate debt.

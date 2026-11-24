@@ -1,9 +1,13 @@
+import {formatMoney} from './money.js';
+
 const previous=new Map();
 export const countNumber=(key,value,precision=0)=>`<span data-count-key="${key}" data-count-to="${Number(value)}" data-count-precision="${precision}">${Number(value).toLocaleString('ko-KR',{minimumFractionDigits:precision,maximumFractionDigits:precision})}</span>`;
+export const countMoney=(key,value)=>`<span data-count-key="${key}" data-count-to="${Number(value)}" data-count-format="money">${formatMoney(value)}</span>`;
 export function animateCounts(root,scope){
  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
  root.querySelectorAll('[data-count-to]').forEach(node=>{
-  const key=`${scope}:${node.dataset.countKey}`,to=Number(node.dataset.countTo),from=previous.get(key)??0,precision=Number(node.dataset.countPrecision)||0,format=value=>value.toLocaleString('ko-KR',{minimumFractionDigits:precision,maximumFractionDigits:precision});previous.set(key,to);
+  const key=`${scope}:${node.dataset.countKey}`,to=Number(node.dataset.countTo),from=previous.get(key)??0,precision=Number(node.dataset.countPrecision)||0,money=node.dataset.countFormat==='money';
+  const format=value=>money?formatMoney(value):value.toLocaleString('ko-KR',{minimumFractionDigits:precision,maximumFractionDigits:precision});previous.set(key,to);
   if(!Number.isFinite(to)||reduced||from===to)return;
   node.textContent=format(from);
   const start=performance.now(),duration=550;

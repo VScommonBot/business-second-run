@@ -1,5 +1,6 @@
 // 캐릭터 표정 리그(눈 깜빡임·입 모양·상황별 표정), 능력치 +/- 플로팅, '이번 달 업무시작!' 4분할 주간 연출을 담당하는 모듈
 import {FACE_MAP} from './face-map.js';
+import {formatMoneySigned} from './money.js';
 
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const MOTION_KEY='bsr-character-motion';
@@ -84,7 +85,7 @@ function flushFloats(root){
   const target=[...root.querySelectorAll(`[data-fx-stat="${key}"]`)].find(el=>el.getClientRects().length);if(!target)continue;
   const r=target.getBoundingClientRect(),el=document.createElement('span');
   el.className=`fx-float ${diff>0?'up':'down'}`;el.setAttribute('aria-hidden','true');
-  el.textContent=`${diff>0?'+':'−'}${Math.abs(diff).toLocaleString('ko-KR')}${key==='cash'||key==='revenue'?'만':''}`;
+  el.textContent=key==='cash'||key==='revenue'?formatMoneySigned(diff):`${diff>0?'+':'−'}${Math.abs(diff).toLocaleString('ko-KR')}`;
   el.style.left=`${r.left+r.width/2+scrollX}px`;el.style.top=`${r.top+scrollY}px`;el.style.setProperty('--i',i++);
   document.body.append(el);el.addEventListener('animationend',()=>el.remove(),{once:true});setTimeout(()=>el.remove(),4000+i*250);
  }

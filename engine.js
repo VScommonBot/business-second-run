@@ -12,6 +12,7 @@ import {nextRelationshipEvent} from './relationship-events.js';
 import {getLocation,locationRent,canRentLocation} from './locations.js';
 import {normalizeGauges,rollTraits,rollGauges,buildStartingProfile,monthlyTraitEffects} from './background.js';
 import {choiceAvailability,eventAvailability} from './conditions.js';
+import {formatMoney,formatMoneySigned} from './money.js';
 export const SAVE_KEY='founder-life-v2';
 export const SKILLS={product:'제품력',sales:'영업력',insight:'시장 이해',management:'운영력',network:'네트워크'};
 export const ACTIONS=[
@@ -182,9 +183,9 @@ function applyEffects(s,fx={}){
 }
 function applySpecial(s,id){
  const needed=Math.max(300,Math.round(-s.cash+Math.max(200,costs(s))*2));
- if(id==='inject'){const allowance=s.investmentLimit==='flex'?Math.max(0,Math.floor(s.initialInvestment*1.5)-s.invested):Infinity;const n=Math.round(Math.min(s.reserve,needed,allowance));s.reserve-=n;s.cash+=n;s.invested+=n;return `개인 비상금 ${n.toLocaleString()}만 원을 회사에 투입했어요.`;}
- if(id==='family_loan'){s.cash+=needed;s.debt+=needed;s.familyDebt+=needed;s.relations.family=(s.relations.family??0)-20;return `가족에게 ${needed.toLocaleString()}만 원을 빌렸어요. 가족 관계 −20.`;}
- if(id==='guarantee_loan'){const n=Math.round(needed*1.5);s.cash+=n;s.debt+=n;s.guarantee+=n;return `보증대출 ${n.toLocaleString()}만 원을 받았어요. 부채에는 매달 0.6%의 이자가 붙어요.`;}
+ if(id==='inject'){const allowance=s.investmentLimit==='flex'?Math.max(0,Math.floor(s.initialInvestment*1.5)-s.invested):Infinity;const n=Math.round(Math.min(s.reserve,needed,allowance));s.reserve-=n;s.cash+=n;s.invested+=n;return `개인 비상금 ${formatMoney(n)}을 회사에 투입했어요.`;}
+ if(id==='family_loan'){s.cash+=needed;s.debt+=needed;s.familyDebt+=needed;s.relations.family=(s.relations.family??0)-20;return `가족에게 ${formatMoney(needed)}을 빌렸어요. 가족 관계 −20.`;}
+ if(id==='guarantee_loan'){const n=Math.round(needed*1.5);s.cash+=n;s.debt+=n;s.guarantee+=n;return `보증대출 ${formatMoney(n)}을 받았어요. 부채에는 매달 0.6%의 이자가 붙어요.`;}
  if(id==='layoff'){const n=Math.ceil(s.team/2);s.team-=n;s.morale=clamp(s.morale-15);s.skills.product=clamp(s.skills.product-4);if(!s.team)delete s.seats.staff;return `직원 ${n}명을 줄였어요. 다음 달 인건비가 줄어들어요.`;}
  return '';
 }
@@ -202,12 +203,12 @@ export function chooseEvent(state,i){
 export function requestFinancing(state,data){if(state.pending||state.ending||forecast(state,data).cashAfterCosts>=0&&state.cash>=costs(state,data)+40)return state;const s=copy(state);s.pending=adaptEvent(data.events.find(e=>e.id==='e_rescue'),s);return s;}
 export function buyItem(state,id){const item=ITEMS.find(x=>x.id===id);if(!item||state.pending||state.ending||state.items.includes(id)||state.cash<item.price)return state;const s=copy(state);s.cash-=item.price;s.items.push(id);s.journal.unshift({month:s.month,title:item.name+' 구입',text:item.desc,type:'item'});return s;}
 export function abandon(state){const s=copy(state);s.ending='close';s.pending=null;return s;}
-export function effectsText(fx={}){const labels={...SKILLS,cash:'현금',health:'체력',customers:'고객',costMod:'월 고정비',team:'직원',equity:'대표 지분',hiddenRisk:'누적 위험',morale:'팀 사기',debt:'부채',guarantee:'개인 보증',custPct:'고객',arpuMod:'객단가',demandMod:'신규 고객 유입',churnMod:'고객 이탈률',capacity:'거점',worldCost:'원가율'};return Object.entries(fx).filter(([,v])=>Number.isFinite(v)&&v!==0).map(([k,v])=>{const percent=['arpuMod','demandMod','churnMod','worldCost'].includes(k);const n=Math.round(v*(percent?100:1)*10)/10;return `${labels[k]||k} ${n>0?'+':''}${n}${['cash','costMod','debt','guarantee'].includes(k)?'만 원':['customers','team'].includes(k)?'명':['custPct','equity'].includes(k)||percent?'%':''}`;}).join(' · ');}
+export function effectsText(fx={}){const labels={...SKILLS,cash:'현금',health:'체력',customers:'고객',costMod:'월 고정비',team:'직원',equity:'대표 지분',hiddenRisk:'누적 위험',morale:'팀 사기',debt:'부채',guarantee:'개인 보증',custPct:'고객',arpuMod:'객단가',demandMod:'신규 고객 유입',churnMod:'고객 이탈률',capacity:'거점',worldCost:'원가율'};return Object.entries(fx).filter(([,v])=>Number.isFinite(v)&&v!==0).map(([k,v])=>{const percent=['arpuMod','demandMod','churnMod','worldCost'].includes(k);const n=Math.round(v*(percent?100:1)*10)/10;return `${labels[k]||k} ${['cash','costMod','debt','guarantee'].includes(k)?formatMoneySigned(v):`${n>0?'+':''}${n}${['customers','team'].includes(k)?'명':['custPct','equity'].includes(k)||percent?'%':''}`}`;}).join(' · ');}
 
 export function changeBusinessPlace(s,id){
  if(s.pending||s.ending||!canRentLocation(id)||id===(s.businessPlace??'home'))return s;
  const n=copy(s),place=getLocation(id);n.businessPlace=id;n.monthlyFixed=costs(n);
- n.journal.unshift({month:s.month,title:'사업장 변경',text:`${place.name}로 옮겼어요. 월 임대료 ${place.monthlyCost.toLocaleString()}만 원은 월말 고정비에 반영돼요.`,type:'location'});
+ n.journal.unshift({month:s.month,title:'사업장 변경',text:`${place.name}로 옮겼어요. 월 임대료 ${formatMoney(place.monthlyCost)}은 월말 고정비에 반영돼요.`,type:'location'});
  return n;
 }
 export function updateMotto(s,value){return {...s,motto:String(value??'').trim().slice(0,80)};}

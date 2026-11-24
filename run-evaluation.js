@@ -1,5 +1,6 @@
 import {roadmapStatus,syncRoadmap} from './plan-roadmap.js';
 import {companyNameFor} from './founder-names.js';
+import {formatMoney} from './money.js';
 const clip=n=>Math.max(0,Math.min(1,Number.isFinite(n)?n:0));
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export const RANKING_KEY='founder-run-ranking-v1';
@@ -17,7 +18,7 @@ export function evaluateRun(state){
   {label:'계획 달성',score:Math.round(completed/n*300),max:300,detail:`처음 세운 목표 ${completed} / ${goals.length}개 달성`},
   {label:'기한 준수',score:Math.round(onTime/n*100),max:100,detail:`기한 안에 ${onTime}개 달성`},
   {label:'성장 규모',score:Math.round(clip(peakCustomers/(expand*10))*200),max:200,detail:`최고 고객 수 ÷ 고객 확대 목표의 10배 (${(expand*10).toLocaleString()}명)`},
-  {label:'수익성',score:Math.round(clip(profit/profitTarget)*200),max:200,detail:`누적 월간 손익 ÷ 초기 준비 비용의 10배 (최소 1억 5천만 원 · 이번 기준 ${profitTarget.toLocaleString()}만 원)`},
+  {label:'수익성',score:Math.round(clip(profit/profitTarget)*200),max:200,detail:`누적 월간 손익 ÷ 초기 준비 비용의 10배 (최소 ${formatMoney(15000)} · 이번 기준 ${formatMoney(profitTarget)})`},
   {label:'건강',score:Math.round(clip((avgHealth-40)/55)*100),max:100,detail:'운영 기간 평균 체력 (40 이하 0점 · 95 이상 만점)'},
   {label:'관계',score:Math.round((relationships.length?relationships.reduce((a,b)=>a+b,0)/relationships.length:0)*100),max:100,detail:'만난 인물의 평균 관계 점수 (음수는 0점)'}
  ];

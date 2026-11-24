@@ -1,6 +1,7 @@
 import {standingFile} from './engine.js';
 import {getLocation} from './locations.js';
 import {SEASONS,sceneAsset,seasonForMonth} from './scenery.js';
+import {formatMoney} from './money.js';
 
 const groups={
  rug:{title:'러그',options:{none:'없음',oat:'오트밀',sage:'세이지',denim:'데님'}},
@@ -29,15 +30,15 @@ export function buyFurnishing(state,id){
  const item=furnishings.find(f=>f.id===id);
  if(!item||purchaseBlock(state,item))return state;
  return {...state,cash:state.cash-item.price,office:{...state.office,owned:[...inventory(state),id]},
- journal:[{month:state.month,title:item.name+' 구입',text:'사무실 꾸미기 · '+item.price+'만 원',type:'item'},...state.journal]};
+ journal:[{month:state.month,title:item.name+' 구입',text:'사무실 꾸미기 · '+formatMoney(item.price),type:'item'},...state.journal]};
 }
 export function furnishingShop(state){
  const rack=group=>furnishings.filter(item=>item.group===group).map(item=>{
   const blocked=purchaseBlock(state,item),owned=blocked==='보유 중';
   const art=group==='rug'?`<i class="shop-rug rug-${item.id}"></i>`:`<img src="assets/office/${item.id}.webp" alt="" loading="lazy" decoding="async">`;
-  return `<article class="furnishing-card"><div class="furnishing-art">${art}</div><h3>${item.name}</h3><p>${item.price}만 원</p>${owned?`<button class="quiet" data-view="office">보유 중 · 꾸미기</button>`:`<button class="primary" data-action="office-buy" data-id="${item.id}" aria-label="${item.name} ${item.price}만 원 ${blocked||'구매'}" ${blocked?'disabled':''}>${blocked||'구매하기'}</button>`}</article>`;
+  return `<article class="furnishing-card"><div class="furnishing-art">${art}</div><h3>${item.name}</h3><p>${formatMoney(item.price)}</p>${owned?`<button class="quiet" data-view="office">보유 중 · 꾸미기</button>`:`<button class="primary" data-action="office-buy" data-id="${item.id}" aria-label="${item.name} ${formatMoney(item.price)} ${blocked||'구매'}" ${blocked?'disabled':''}>${blocked||'구매하기'}</button>`}</article>`;
  }).join('');
- return `<div class="furnishing-shop"><header><strong>보유 현금 ${Math.round(state.cash).toLocaleString('ko-KR')}만 원</strong><button class="quiet" data-view="office">내 사무실 꾸미기</button></header>${['rug','decor'].map(key=>`<section><h2>${groups[key].title}</h2><div class="furnishing-rack">${rack(key)}</div></section>`).join('')}</div>`;
+ return `<div class="furnishing-shop"><header><strong>보유 현금 ${formatMoney(state.cash)}</strong><button class="quiet" data-view="office">내 사무실 꾸미기</button></header>${['rug','decor'].map(key=>`<section><h2>${groups[key].title}</h2><div class="furnishing-rack">${rack(key)}</div></section>`).join('')}</div>`;
 }
 function choice(state,key){
  const value=state.office?.[key],options=groups[key].options;

@@ -1,3 +1,4 @@
+import {formatMoney} from './money.js';
 // Career rewards are local game progress. No client-side paid currency grants.
 export const ACHIEVEMENT_TRACKS=[
  {id:'revenue',title:'매출의 계단',metric:'totalRevenue',unit:'만 원',icon:'cash',targets:[3000,20000,80000,180000],ids:['revenue-1000','revenue-10000','revenue-50000','revenue-100000']},
@@ -11,7 +12,7 @@ export const ACHIEVEMENT_TRACKS=[
 ];
 export const TIERS=['브론즈','실버','골드','플래티넘'];
 const characterRewards={'research-3':'special-maker','revenue-10000':'special-campus','customers-200':'special-global','lessons-40':'special-researcher','profit-24':'special-artisan','comeback':'special-restart','growth-master':'special-serial','healthy-finale':'special-community'};
-const baseQuests=ACHIEVEMENT_TRACKS.flatMap(track=>track.targets.map((target,i)=>({id:track.ids?.[i]||`${track.id}-${i+1}`,track:track.id,title:`${track.title} · ${TIERS[i]}`,description:`${track.title} ${target.toLocaleString('ko-KR')}${track.unit}`,metric:track.metric,target,unit:track.unit,icon:track.icon,tier:i})));
+const baseQuests=ACHIEVEMENT_TRACKS.flatMap(track=>track.targets.map((target,i)=>({id:track.ids?.[i]||`${track.id}-${i+1}`,track:track.id,title:`${track.title} · ${TIERS[i]}`,description:`${track.title} ${track.unit==='만 원'?formatMoney(target):target.toLocaleString('ko-KR')+track.unit}`,metric:track.metric,target,unit:track.unit,icon:track.icon,tier:i})));
 const finaleQuests=[
  {id:'hard-streak',track:'hard',title:'불황의 흑자 기록',description:'어려움 이상에서 한 도전 중 12개월 연속 흑자',metric:'hardStreak',target:12,unit:'개월',icon:'award'},
  {id:'hard-finale',track:'hard',title:'끝까지 건강한 대표',description:'어려움 이상에서 체력 65 이상으로 60개월 성장 엔딩',metric:'hardFinale',target:1,unit:'회',icon:'award'},
