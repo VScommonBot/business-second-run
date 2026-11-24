@@ -1,5 +1,6 @@
 import {formatMoney,formatMoneySigned} from './money.js';
 import {axisLabel,axisY,financeSeries} from './finance-series.js';
+export {financeSeries};
 
 const finite=value=>typeof value==='number'&&Number.isFinite(value);
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
