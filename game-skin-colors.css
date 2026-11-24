@@ -271,7 +271,7 @@ dialog:is(#modal){border:1px solid rgba(201,205,251,0.22)}
 :is(body[data-skin],#modal) .ending-page[data-ending=close] .ending-hero{background:linear-gradient(135deg,#262267,#5b3f1f)}
 :is(body[data-skin],#modal) .ending-page[data-ending=growth] .ending-hero{background:linear-gradient(135deg,#262267,#215a2b)}
 :is(body[data-skin],#modal) .ending-page[data-ending=ipo] .ending-hero{background:linear-gradient(135deg,#262267,#5f4e1c)}
-@media (max-width:760px){
+@media (max-width:760px),(orientation:landscape) and (max-height:500px){
  :is(body[data-skin],#modal) .plan-comparison th{background:#242162}
  :is(body[data-skin],#modal) .plan-comparison td:before{color:#bfc3f8}
 }

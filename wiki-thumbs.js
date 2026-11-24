@@ -13,4 +13,5 @@ export const WIKI_THUMB_CATEGORY={
 };
 export function wikiThumbFile(id,category){return TERM_IDS.has(id)?id:`cat-${WIKI_THUMB_CATEGORY[category]||'funds'}`;}
 export function wikiThumbPath(id,category){return `assets/wiki-thumbs/${wikiThumbFile(id,category)}.webp`;}
+export function wikiThumbSmallPath(id,category){return `assets/wiki-thumbs/sm/${wikiThumbFile(id,category)}.webp`;}
 export function wikiThumbFallbackPath(id,category){return `assets/wiki-thumbs/${wikiThumbFile(id,category)}.svg`;}

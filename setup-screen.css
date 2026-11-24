@@ -69,7 +69,7 @@ body[data-skin] .setup-bottom .begin-game{min-width:220px;min-height:54px;font-s
 
 @media(max-width:1100px){body[data-skin] #character-form .setup-grid{grid-template-columns:270px minmax(0,1fr)}body[data-skin] .setup-stats{grid-column:1/-1}body[data-skin] .industry-layout{grid-template-columns:minmax(0,1fr) 260px}}
 @media(max-width:860px){body[data-skin] .industry-layout{grid-template-columns:1fr}body[data-skin] .industry-preview{position:static}}
-@media(max-width:760px){
+@media (max-width:760px),(orientation:landscape) and (max-height:500px){
  body[data-skin] .setup-shell{padding:18px 14px 30px}
  body[data-skin] #character-form .setup-grid{display:flex;flex-direction:column;gap:16px}
  body[data-skin] .setup-industry,body[data-skin] .special-gallery{padding:16px}
@@ -81,7 +81,7 @@ body[data-skin] .setup-bottom .begin-game{min-width:220px;min-height:54px;font-s
  body[data-skin] .setup-bottom{bottom:0;border-radius:16px 16px 0 0;margin:18px -14px -30px;padding:12px 14px}
  body[data-skin] .setup-bottom .begin-game{min-width:0}
 }
-@media(max-width:760px){
+@media (max-width:760px),(orientation:landscape) and (max-height:500px){
  body[data-skin] .special-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
  body[data-skin] .special-character{grid-template-columns:1fr}
  body[data-skin] .special-portrait{min-height:0;height:132px;border-right:0;border-bottom:2.5px solid var(--g-ink)}

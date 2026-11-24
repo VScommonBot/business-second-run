@@ -1,8 +1,9 @@
 import {GLOSSARY,searchGlossary,WIKI_SOURCES,WIKI_PATHS} from './glossary.js';
-import {wikiThumbPath} from './wiki-thumbs.js';
+import {wikiThumbPath,wikiThumbSmallPath,wikiThumbFallbackPath} from './wiki-thumbs.js';
 import {statIcon} from './stat-view.js';
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const wikiThumb=(term,lazy=true)=>`<img class="wiki-thumb" src="${wikiThumbPath(term.id,term.category)}" alt="" width="960" height="600"${lazy?' loading="lazy"':''} decoding="async" onerror="this.onerror=null;this.src=this.src.replace('.webp','.svg')">`;
+// 목록에서는 작은 썸네일(480px, sm/)을 먼저 쓰고, 용어 상세 창에서는 원본(960px)을 씁니다
+const wikiThumb=(term,lazy=true)=>{const full=wikiThumbPath(term.id,term.category),small=wikiThumbSmallPath(term.id,term.category);return `<img class="wiki-thumb" src="${lazy?small:full}"${lazy?` srcset="${small} 480w, ${full} 960w" sizes="(max-width:760px) 46vw, 240px"`:''} alt="" width="960" height="600"${lazy?' loading="lazy"':''} decoding="async" onerror="this.onerror=null;this.removeAttribute('srcset');this.src='${wikiThumbFallbackPath(term.id,term.category)}'">`;};
 export const WIKI_CATEGORIES=['자금','고객','제품','조직','기업·전략','투자','투자자·지원','투자계약'];
 const categoryIndex=category=>WIKI_CATEGORIES.indexOf(category);
 const termButton=id=>{const term=GLOSSARY.find(t=>t.id===id);return term?`<button class="wiki-term-chip" data-action="wiki-term" data-id="${term.id}">${esc(term.term)}</button>`:'';};
