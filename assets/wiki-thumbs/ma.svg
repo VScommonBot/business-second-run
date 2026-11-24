@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400">
+<defs>
+<linearGradient id="bg-ma" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#15122e"/>
+<stop offset=".55" stop-color="#1c1440"/>
+<stop offset="1" stop-color="#24103c"/>
+</linearGradient>
+<radialGradient id="blob-ma" cx="28%" cy="22%" r="70%">
+<stop offset="0" stop-color="#8b7cff" stop-opacity=".42"/>
+<stop offset="1" stop-color="#8b7cff" stop-opacity="0"/>
+</radialGradient>
+<filter id="soft-ma" x="-15%" y="-15%" width="130%" height="130%">
+<feDropShadow dx="0" dy="6" stdDeviation="4" flood-color="#0b0818" flood-opacity=".35"/>
+</filter>
+</defs>
+<rect width="640" height="400" fill="url(#bg-ma)"/>
+<circle cx="130" cy="70" r="170" fill="url(#blob-ma)"/>
+<circle cx="540" cy="330" r="150" fill="#8b7cff" fill-opacity=".14"/>
+<circle cx="480" cy="70" r="8" fill="#5ee0ff" opacity=".55"/>
+<circle cx="90" cy="300" r="5" fill="#ffd166" opacity=".45"/>
+<circle cx="600" cy="140" r="6" fill="#ff6ad4" opacity=".4"/>
+<g filter="url(#soft-ma)"><ellipse cx="320.0" cy="348.0" rx="230.0" ry="30.0" fill="#090616" opacity="0.35"/><rect x="180.0" y="160.0" width="100.0" height="160.0" rx="10" fill="#353a78" stroke="#1b1440" stroke-width="8" stroke-linejoin="round"/><rect x="196.0" y="178.0" width="29.0" height="19.5" rx="4" fill="#5ee0ff" stroke="#1b1440" stroke-width="3.5" stroke-linejoin="round"/><rect x="235.0" y="178.0" width="29.0" height="19.5" rx="4" fill="#ffd166" stroke="#1b1440" stroke-width="3.5" stroke-linejoin="round"/><rect x="196.0" y="207.5" width="29.0" height="19.5" rx="4" fill="#ffd166" stroke="#1b1440" stroke-width="3.5" stroke-linejoin="round"/><rect x="235.0" y="207.5" width="29.0" height="19.5" rx="4" fill="#5ee0ff" stroke="#1b1440" stroke-width="3.5" stroke-linejoin="round"/><rect x="196.0" y="237.0" width="29.0" height="19.5" rx="4" fill="#5ee0ff" stroke="#1b1440" stroke-width="3.5" stroke-linejoin="round"/><rect x="235.0" y="237.0" width="29.0" height="19.5" rx="4" fill="#ffd166" stroke="#1b1440" stroke-width="3.5" stroke-linejoin="round"/><rect x="196.0" y="266.5" width="29.0" height="19.5" rx="4" fill="#ffd166" stroke="#1b1440" stroke-width="3.5" stroke-linejoin="round"/><rect x="235.0" y="266.5" width="29.0" height="19.5" rx="4" fill="#5ee0ff" stroke="#1b1440" stroke-width="3.5" stroke-linejoin="round"/><rect x="218.0" y="298.0" width="24.0" height="22.0" rx="4" fill="#2a1d4a" stroke="#1b1440" stroke-width="5" stroke-linejoin="round"/><rect x="380.0" y="160.0" width="100.0" height="160.0" rx="10" fill="#8b7cff" stroke="#1b1440" stroke-width="8" stroke-linejoin="round"/><rect x="396.0" y="178.0" width="29.0" height="19.5" rx="4" fill="#5ee0ff" stroke="#1b1440" stroke-width="3.5" stroke-linejoin="round"/><rect x="435.0" y="178.0" width="29.0" height="19.5" rx="4" fill="#ffd166" stroke="#1b1440" stroke-width="3.5" stroke-linejoin="round"/><rect x="396.0" y="207.5" width="29.0" height="19.5" rx="4" fill="#ffd166" stroke="#1b1440" stroke-width="3.5" stroke-linejoin="round"/><rect x="435.0" y="207.5" width="29.0" height="19.5" rx="4" fill="#5ee0ff" stroke="#1b1440" stroke-width="3.5" stroke-linejoin="round"/><rect x="396.0" y="237.0" width="29.0" height="19.5" rx="4" fill="#5ee0ff" stroke="#1b1440" stroke-width="3.5" stroke-linejoin="round"/><rect x="435.0" y="237.0" width="29.0" height="19.5" rx="4" fill="#ffd166" stroke="#1b1440" stroke-width="3.5" stroke-linejoin="round"/><rect x="396.0" y="266.5" width="29.0" height="19.5" rx="4" fill="#ffd166" stroke="#1b1440" stroke-width="3.5" stroke-linejoin="round"/><rect x="435.0" y="266.5" width="29.0" height="19.5" rx="4" fill="#5ee0ff" stroke="#1b1440" stroke-width="3.5" stroke-linejoin="round"/><rect x="418.0" y="298.0" width="24.0" height="22.0" rx="4" fill="#2a1d4a" stroke="#1b1440" stroke-width="5" stroke-linejoin="round"/><path d="M300,200 L360,200" fill="none" stroke="#ffd166" stroke-width="10" stroke-linejoin="round" stroke-linecap="round" opacity="1"/><polygon points="360.0,188.0 382.0,200.0 360.0,212.0" fill="#ffd166" stroke="#1b1440" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/><polygon points="300.0,188.0 278.0,200.0 300.0,212.0" fill="#ffd166" stroke="#1b1440" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/></g>
+</svg>

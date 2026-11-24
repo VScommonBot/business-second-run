@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400">
+<defs>
+<linearGradient id="bg-catproduct" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#15122e"/>
+<stop offset=".55" stop-color="#1c1440"/>
+<stop offset="1" stop-color="#24103c"/>
+</linearGradient>
+<radialGradient id="blob-catproduct" cx="28%" cy="22%" r="70%">
+<stop offset="0" stop-color="#b89bff" stop-opacity=".42"/>
+<stop offset="1" stop-color="#b89bff" stop-opacity="0"/>
+</radialGradient>
+<filter id="soft-catproduct" x="-15%" y="-15%" width="130%" height="130%">
+<feDropShadow dx="0" dy="6" stdDeviation="4" flood-color="#0b0818" flood-opacity=".35"/>
+</filter>
+</defs>
+<rect width="640" height="400" fill="url(#bg-catproduct)"/>
+<circle cx="130" cy="70" r="170" fill="url(#blob-catproduct)"/>
+<circle cx="540" cy="330" r="150" fill="#b89bff" fill-opacity=".14"/>
+<circle cx="480" cy="70" r="8" fill="#5ee0ff" opacity=".55"/>
+<circle cx="90" cy="300" r="5" fill="#ffd166" opacity=".45"/>
+<circle cx="600" cy="140" r="6" fill="#ff6ad4" opacity=".4"/>
+<g filter="url(#soft-catproduct)"><ellipse cx="320.0" cy="348.0" rx="230.0" ry="30.0" fill="#090616" opacity="0.35"/><polygon points="320.0,140.0 400.0,180.0 320.0,220.0 240.0,180.0" fill="#5ee0ff" stroke="#1b1440" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/><polygon points="240.0,180.0 320.0,220.0 320.0,300.0 240.0,260.0" fill="#8b7cff" stroke="#1b1440" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/><polygon points="320.0,220.0 400.0,180.0 400.0,260.0 320.0,300.0" fill="#2c2f66" stroke="#1b1440" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/><path d="M470,230 L500,260 L560,180" fill="none" stroke="#5dffc4" stroke-width="14" stroke-linejoin="round" stroke-linecap="round" opacity="1"/></g>
+</svg>

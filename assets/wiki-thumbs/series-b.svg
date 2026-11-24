@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400">
+<defs>
+<linearGradient id="bg-seriesb" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#15122e"/>
+<stop offset=".55" stop-color="#1c1440"/>
+<stop offset="1" stop-color="#24103c"/>
+</linearGradient>
+<radialGradient id="blob-seriesb" cx="28%" cy="22%" r="70%">
+<stop offset="0" stop-color="#8b7cff" stop-opacity=".42"/>
+<stop offset="1" stop-color="#8b7cff" stop-opacity="0"/>
+</radialGradient>
+<filter id="soft-seriesb" x="-15%" y="-15%" width="130%" height="130%">
+<feDropShadow dx="0" dy="6" stdDeviation="4" flood-color="#0b0818" flood-opacity=".35"/>
+</filter>
+</defs>
+<rect width="640" height="400" fill="url(#bg-seriesb)"/>
+<circle cx="130" cy="70" r="170" fill="url(#blob-seriesb)"/>
+<circle cx="540" cy="330" r="150" fill="#8b7cff" fill-opacity=".14"/>
+<circle cx="480" cy="70" r="8" fill="#5ee0ff" opacity=".55"/>
+<circle cx="90" cy="300" r="5" fill="#ffd166" opacity=".45"/>
+<circle cx="600" cy="140" r="6" fill="#ff6ad4" opacity=".4"/>
+<g filter="url(#soft-seriesb)"><ellipse cx="320.0" cy="348.0" rx="230.0" ry="30.0" fill="#090616" opacity="0.35"/><path d="M200.0,161.0 Q219.6,196.0 216.8,231.0 H183.2 Q180.4,196.0 200.0,161.0Z" fill="#b89bff" stroke="#1b1440" stroke-width="8" stroke-linejoin="round" stroke-linecap="round" opacity="1"/><circle cx="200.0" cy="203.0" r="8.4" fill="#f6f8ff" stroke="#1b1440" stroke-width="6"/><polygon points="183.2,221.2 166.4,239.4 187.4,231.0" fill="#ff5d6c" stroke="#1b1440" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/><polygon points="216.8,221.2 233.6,239.4 212.6,231.0" fill="#ff5d6c" stroke="#1b1440" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/><path d="M200.0,260.1 C186.3,250.3 192.2,236.6 200.0,228.8 C203.9,240.5 212.7,245.4 200.0,260.1Z" fill="#ff8a3d" stroke="#1b1440" stroke-width="7" stroke-linejoin="round" stroke-linecap="round" opacity="1"/><path d="M200.0,254.2 C194.1,248.4 198.0,242.5 200.0,238.6 C202.0,245.4 204.9,247.4 200.0,254.2Z" fill="#ffd166" stroke="#1b1440" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" opacity="1"/><circle cx="400.0" cy="150.0" r="70.0" fill="#63d67a" stroke="#1b1440" stroke-width="8"/><circle cx="340.0" cy="180.0" r="46.0" fill="#5dffc4" stroke="#1b1440" stroke-width="7"/><circle cx="460.0" cy="190.0" r="44.0" fill="#63d67a" stroke="#1b1440" stroke-width="7"/><rect x="386.0" y="200.0" width="28.0" height="110.0" rx="8" fill="#c9894a" stroke="#1b1440" stroke-width="7" stroke-linejoin="round"/><ellipse cx="520.0" cy="268.0" rx="20.0" ry="8.4" fill="#ffd166" opacity="1" stroke="#1b1440" stroke-width="6"/><ellipse cx="520.0" cy="276.0" rx="20.0" ry="8.4" fill="#ffd166" opacity="1" stroke="#1b1440" stroke-width="6"/><ellipse cx="520.0" cy="284.0" rx="20.0" ry="8.4" fill="#ffd166" opacity="1" stroke="#1b1440" stroke-width="6"/><ellipse cx="520.0" cy="292.0" rx="20.0" ry="8.4" fill="#ffd166" opacity="1" stroke="#1b1440" stroke-width="6"/><ellipse cx="520.0" cy="300.0" rx="20.0" ry="8.4" fill="#ffd166" opacity="1" stroke="#1b1440" stroke-width="6"/><ellipse cx="515.0" cy="266.4" rx="6.0" ry="2.0" fill="#f6f8ff" opacity="0.45"/></g>
+</svg>

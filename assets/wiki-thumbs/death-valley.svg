@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400">
+<defs>
+<linearGradient id="bg-deathvalley" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#15122e"/>
+<stop offset=".55" stop-color="#1c1440"/>
+<stop offset="1" stop-color="#24103c"/>
+</linearGradient>
+<radialGradient id="blob-deathvalley" cx="28%" cy="22%" r="70%">
+<stop offset="0" stop-color="#6aa8ff" stop-opacity=".42"/>
+<stop offset="1" stop-color="#6aa8ff" stop-opacity="0"/>
+</radialGradient>
+<filter id="soft-deathvalley" x="-15%" y="-15%" width="130%" height="130%">
+<feDropShadow dx="0" dy="6" stdDeviation="4" flood-color="#0b0818" flood-opacity=".35"/>
+</filter>
+</defs>
+<rect width="640" height="400" fill="url(#bg-deathvalley)"/>
+<circle cx="130" cy="70" r="170" fill="url(#blob-deathvalley)"/>
+<circle cx="540" cy="330" r="150" fill="#6aa8ff" fill-opacity=".14"/>
+<circle cx="480" cy="70" r="8" fill="#5ee0ff" opacity=".55"/>
+<circle cx="90" cy="300" r="5" fill="#ffd166" opacity=".45"/>
+<circle cx="600" cy="140" r="6" fill="#ff6ad4" opacity=".4"/>
+<g filter="url(#soft-deathvalley)"><ellipse cx="320.0" cy="360.0" rx="260.0" ry="30.0" fill="#090616" opacity="0.35"/><path d="M60,140 L160,140 L250,300 L390,300 L500,140 H580 L500,340 H140 Z" fill="#2a2150" stroke="#1b1440" stroke-width="8" stroke-linejoin="round" stroke-linecap="round" opacity="1"/><circle cx="460.0" cy="110.0" r="28.0" fill="#ffd166" stroke="#1b1440" stroke-width="7"/><path d="M250,300 C300,250 340,250 390,300" fill="none" stroke="#ff5d6c" stroke-width="8" stroke-linejoin="round" stroke-linecap="round" opacity="1"/><ellipse cx="320.0" cy="289.8" rx="14.3" ry="4.4" fill="#000" opacity="0.18"/><path d="M307.9,285.4 Q320.0,265.6 332.1,285.4 Q320.0,293.1 307.9,285.4Z" fill="#ff7aa2" stroke="#1b1440" stroke-width="7" stroke-linejoin="round" stroke-linecap="round" opacity="1"/><circle cx="320.0" cy="249.1" r="12.1" fill="#ffd2b5" stroke="#1b1440" stroke-width="7"/><path d="M309.9,245.1 Q320.0,231.5 330.1,245.1 Q320.0,240.3 309.9,245.1Z" fill="#1b1440" stroke="#1b1440" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity="1"/><circle cx="316.1" cy="250.2" r="1.8" fill="#1b1440" stroke="#1b1440" stroke-width="0"/><circle cx="323.9" cy="250.2" r="1.8" fill="#1b1440" stroke="#1b1440" stroke-width="0"/><circle cx="324.4" cy="254.6" r="2.5" fill="#ff7aa2" stroke="none" stroke-width="0"/></g>
+</svg>
